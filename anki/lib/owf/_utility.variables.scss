@@ -1,0 +1,5 @@
+$owf-utility_sides_horizontal: (left, right);
+$owf-utility_sides_vertical: (top, bottom);
+$owf-utility_sides: join($owf-utility_sides_vertical, $owf-utility_sides_horizontal);
+$owf-utility_valid-float-values: join($owf-utility_sides_horizontal, none);
+$owf-utility_valid-clear-values: join($owf-utility_valid-float-values, both);

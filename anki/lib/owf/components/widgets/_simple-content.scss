@@ -1,0 +1,99 @@
+$owf-widget-simple-content_name: simple-content !default;
+$owf-widget-simple-content_class-name: #{$owf-widget_class-name}-#{$owf-widget-simple-content_name};
+$owf-widget-simple-content__bar_margin-top: 5px !default;
+$owf-widget-simple-content_height: $owf-card_height !default;
+
+&-#{$owf-widget-simple-content_name} {
+    @include owf-modify_no-padding('.#{$owf-widget-simple-content_class-name}-layout');
+    
+    width: 100%;
+    height: 100%;
+    min-height: $owf-widget-simple-content_height;
+    display: table;
+    table-layout: fixed;
+    
+    &-layout {
+        padding: $owf-base_padding;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    &__status {
+        width: $owf-card_height;
+        min-width: $owf-card_height;
+        max-width: $owf-card_height;
+        height: $owf-card_height; //inherit;
+        //min-height: $owf-card_height;
+        display: table-cell;
+        position: relative;
+        overflow: hidden;
+        font-size: $owf-card_height * 0.275; // 0.5 * 0.55
+        
+        &#{&}--narrow {
+            width: $owf-card_height - $owf-base_border-width_thick;
+            min-width: $owf-card_height - $owf-base_border-width_thick;
+            max-width: $owf-card_height - $owf-base_border-width_thick;
+        }
+        
+        &#{&}--compensate-for-thick-border {
+            > :first-child {
+                width: $owf-card_height;
+                margin-left: -1 * $owf-base_border-width_thick;
+            }
+        }
+    }
+    &__title {
+        @extend %owf-utility_text-overflow-ellipsis;
+        @extend %owf-base_font;
+    }
+    &__content {
+        @extend %owf-utility_text-overflow-ellipsis;
+        @extend %owf-base_font_big;
+        
+        &#{&}--allow-wrapping {
+            white-space: normal;
+        }
+    }
+    &__bar {
+        margin-top: $owf-widget-simple-content__bar_margin-top;
+    }
+    
+    &#{&}--hide-status {
+        .#{$owf-widget-simple-content_class-name} {
+            &__status {
+                display: none;
+            }
+        }
+    }
+    &#{&}--automatic-height {
+        min-height: 0;
+    }
+    &#{&}--vertical {
+        .#{$owf-widget-simple-content_class-name} {
+            &-layout {
+                display: block;
+                text-align: center;
+                padding-top: 0;
+            }
+            &__status {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 120px;
+                height: 120px;
+                max-width: 120px;
+                max-height: 120px;
+                font-size: 120px * 0.275;
+            }
+            &__content {
+                font-size: 20px;
+                font-weight: $owf-base_font-weight_bold;
+                //letter-spacing: -0.04em;
+                //transform: scaleY(0.93);
+            }
+            &__title {
+                color: owf-color_get-shade($owf-color_text, 55%);
+            }
+        }
+    }
+}

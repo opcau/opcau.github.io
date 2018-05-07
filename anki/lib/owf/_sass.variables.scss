@@ -1,0 +1,13 @@
+////
+/// @group sass
+/// @author mimisanc
+////
+
+/// Contains a string representing the current media query scope. Possible values are constrained by the `$owf-sass_placeholderable-media-queries` map. A `null` value represents the root scope (Outside of a media query).
+$owf-sass_current-placeholderable-media-query: null;
+$owf-sass_placeholderable-media-queries: (
+    "extra-small": "(max-width: 767px)",
+    "small": "(min-width: 768px) and (max-width: 991px)",
+    "medium": "(min-width: 992px) and (max-width: 1199px)",
+    "large": "(min-width: 1200px)"
+);

@@ -1,0 +1,54 @@
+$owf-control-switch_name: switch !default;
+$owf-control-switch_class-name: #{$owf-control_class-name}-#{$owf-control-switch_name};
+
+&-#{$owf-control-switch_name} {
+    position: relative;
+    width: 36px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    
+    &__checkbox {
+        display: none;
+        
+        &:checked {
+            & + .#{$owf-control-switch_class-name} {
+                &__label {
+                    background-color: $owf-color_status-primary_background;
+                    
+                    &:before {
+                        //right: 0px; 
+                        left: 18px;
+                    }
+                }
+            }
+        }
+    }
+    &__label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        height: 18px;
+        padding: 0;
+        line-height: 18px;
+        /*border: 0px solid #FFFFFF;*/
+        border-radius: 16px;
+        background-color: #9E9E9E;
+        
+        &:before {
+            content: "";
+            display: block;
+            width: 16px;
+            margin: 1px;
+            background: #FFFFFF;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            border-radius: 100%;
+            
+            transition-property: left;
+            transition-duration: $owf-base_transition-duration / 4;
+        }
+    }
+}

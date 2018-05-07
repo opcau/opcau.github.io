@@ -1,0 +1,96 @@
+@mixin owf-utility_wrap-content-inside-selector($selector, $at-root: false){
+    @if $selector != null and type-of($selector) != string {
+        @error 'Parameter $selector must be either null or a string. Was "#{$selector}" (#{type-of($selector)}).';
+    }
+    
+    @if $selector != null and str-length($selector) > 0 {
+        @if $at-root {
+            @at-root #{$selector} {
+                @content
+            }
+        } @else {
+            #{$selector} {
+                @content;
+            }
+        }
+    } @else {
+        @content;
+    }
+}
+@mixin owf-utility_style-html-element-for-selector($element, $selector: null){
+    @at-root #{$element}#{if($selector == null, &, $selector)} {
+        @content;
+    }
+}
+@mixin owf-utility_no-padding-modifiers($selector: null) {
+    &#{&}--no-padding {
+        @include owf-utility_wrap-content-inside-selector($selector) {
+            @extend %owf-utility_no-padding;
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    padding-#{$side}: 0;
+                }
+            }
+        }
+    }
+}
+@mixin owf-utility_no-margin-modifiers($selector: null) {
+    &#{&}--no-margin {
+        @include owf-utility_wrap-content-inside-selector($selector) {
+            @extend %owf-utility_no-margin;
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    margin-#{$side}: 0;
+                }
+            }
+        }
+    }
+}
+@mixin owf-utility_float-modifiers($selector: null) {
+    &#{&}--float {
+        @each $side in $owf-utility_valid-float-values {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_float_#{$side});
+                }
+            }
+        }
+    }
+}
+@mixin owf-utility_clear-modifiers($selector: null) {
+    &#{&}--float {
+        @each $side in $owf-utility_valid-clear-values {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_clear_#{$side});
+                }
+            }
+        }
+    }
+}
+@mixin owf-utility_wrap-content-inside-status-modifiers($selector: null, $at-root: true){
+    $modifiers-selector: "";
+    $selector: if($selector == null, &, $selector);
+    $is-first-modifier: true;
+    
+    @each $modifier in map-keys($owf-color_status-modifiers-map_background) {
+        $modifiers-selector: #{$modifiers-selector}#{if($is-first-modifier, "", ", ")}#{$selector}#{$selector}--#{$modifier};
+        $is-first-modifier: false;
+    }
+    
+    @if $at-root {
+        @at-root #{$modifiers-selector} {
+            @content;
+        }
+    } @else {
+        #{$modifiers-selector} {
+            @content;
+        }
+    }
+}

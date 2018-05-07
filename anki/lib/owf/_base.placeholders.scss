@@ -1,0 +1,14 @@
+@include owf-sass_define-placeholders {
+    @include owf-sass_define-placeholder(owf-base_font_small) {
+        font-size: $owf-base_font-size_small;
+        font-weight: $owf-base_font-weight;
+    }
+    @include owf-sass_define-placeholder(owf-base_font) {
+        font-size: $owf-base_font-size;
+        font-weight: $owf-base_font-weight;
+    }
+    @include owf-sass_define-placeholder(owf-base_font_big) {
+        font-size: $owf-base_font-size_big;
+        font-weight: $owf-base_font-weight;
+    }
+}

@@ -1,0 +1,41 @@
+$owf-base_namespace: owf !default;
+
+$owf-base_pixels-per-rem: 10px !default;
+
+$owf-base_padding: 15px !default;
+$owf-base_padding_medium: $owf-base_padding * 2 / 3 !default;
+$owf-base_padding_small: $owf-base_padding_medium / 2 !default;
+$owf-base_padding_extra-small: $owf-base_padding_small / 2 !default;
+$owf-base_line-height: 1.428571429 !default;
+
+$owf-base_row_height: 50px !default;
+$owf-base_row_height_medium: $owf-base_row_height * 4 / 5 !default;
+$owf-base_row_height_small: $owf-base_row_height_medium * 3 / 4 !default;
+
+$owf-base_border-width: 1px !default;
+$owf-base_border-width_medium: 2px !default;
+$owf-base_border-width_thick: 5px !default;
+$owf-base_border-style: solid !default;
+$owf-base_border: $owf-base_border-width $owf-base_border-style $owf-color_border;
+
+$owf-base_font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$owf-base_font-size: 14px !default;
+$owf-base_font-size_small: $owf-base_font-size * 11 / 14 !default;
+$owf-base_font-size_medium: $owf-base_font-size * 16 / 14 !default;
+$owf-base_font-size_big: $owf-base_font-size * 24 / 14 !default;
+$owf-base_font-weight: 300 !default;
+$owf-base_font-weight_medium: 400 !default;
+$owf-base_font-weight_bold: 500 !default;
+
+$owf-base_box-shadow_h-shadow: 0px !default;
+$owf-base_box-shadow_v-shadow: 2px !default;
+$owf-base_box-shadow_blur: 10px !default;
+$owf-base_box-shadow_spread: 0px !default;
+$owf-base_box-shadow_color: rgba(50, 50, 50, 0.1) !default;
+$owf-base_box-shadow: $owf-base_box-shadow_h-shadow $owf-base_box-shadow_v-shadow $owf-base_box-shadow_blur $owf-base_box-shadow_spread $owf-base_box-shadow_color !default;
+
+//$owf-base_outline: $owf-color_outline $owf-base_border-style $owf-base_border-width;
+
+$owf-base_transition-duration: 0.5s !default;
+
+$owf-base_z-index: 1 !default;

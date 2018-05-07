@@ -1,0 +1,9 @@
+@include owf-sass_define-placeholders{
+    @include owf-sass_define-placeholder(owf-reset_anchor) {
+        @include owf-reset_anchor;
+    }
+    @include owf-sass_define-placeholder(owf-reset_list) {
+        @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+        list-style: none;
+    }
+}

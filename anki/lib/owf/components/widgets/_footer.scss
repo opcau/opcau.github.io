@@ -1,0 +1,35 @@
+$owf-widget-footer_class-name: #{$owf-widget_class-name}-footer;
+
+&-footer {
+    @extend %owf-utility_clearfix;
+    
+    padding: $owf-base_padding;
+    border-top: $owf-base_border;
+    background: lighten($owf-color_background, 7.5%);
+    color: owf-color_get-shade($owf-color_background, darker);
+    box-shadow: $owf-base_box-shadow_h-shadow -1 * $owf-base_box-shadow_v-shadow $owf-base_box-shadow_blur $owf-base_box-shadow_spread $owf-base_box-shadow_color;
+    box-sizing: content-box;
+    
+    // When sticky or fixed, all other content must account for the footer height to ser margins
+    &#{&}--sticky, &#{&}--fixed {
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+    &#{&}--fixed {
+        position: fixed;
+    }
+    &#{&}--text-only {
+        &.#{$owf-widget-footer_class-name} {
+            &--single-line {
+                @extend %owf-utility_text-overflow-ellipsis;
+
+                height: $owf-base_line-height * $owf-base_font-size + 2 * $owf-base_padding;
+                line-height: $owf-base_line-height * $owf-base_font-size + 2 * $owf-base_padding;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}

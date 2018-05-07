@@ -1,0 +1,117 @@
+$owf-widget-field_name: field !default;
+$owf-widget-field_class-name: #{$owf-widget_class-name}-#{$owf-widget-field_name};
+
+&-#{$owf-widget-field_name} {
+    @include owf-modify_no-margin;
+    @include owf-modify_no-padding;
+    
+    margin-bottom: $owf-base_padding_medium;
+    padding-top: $owf-base_font-size_medium;
+    position: relative;
+    
+    &__control {
+        /*&[required]:valid,
+        &[placeholder=""],
+        &:not([placeholder]),
+        &[data-show-label] {
+            &  + .#{$owf-widget-field_class-name} {
+                &__label {
+                    top: 0;
+                    opacity: 1;
+                }
+            }
+        }*/
+        
+        &#{&}--position-absolute {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: $owf-base_z-index;
+            
+            & + .#{$owf-widget-field_class-name} {
+                padding-left: $owf-base_padding_medium * 2 + $owf-base_padding_extra-small; /*22.5px;*/
+            }
+        }
+    }
+    &__label {
+        @include owf-sass_extend-placeholder(owf-utility_no-margin);
+        
+        display: block;
+        width: 100%;
+        font-size: $owf-base_font-size_small;
+        font-weight: $owf-base_font-weight_medium;
+        color: owf-color_get-shade(map-get($owf-color_status-modifiers-map_background, default), -25%);
+        padding: 0 $owf-base_padding_extra-small;
+        line-height: $owf-base_font-size_medium;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &__feedback {
+        @include owf-sass_extend-placeholder(owf-utility_text-overflow-ellipsis);
+        @include owf-modify_status-text();
+        
+        padding: $owf-base_padding_extra-small;
+        
+        font-size: $owf-base_font-size_small;
+        font-weight: $owf-base_font-weight_medium;
+        
+        text-align: right;
+        
+        //&:hover {
+        //    @include owf-modify_status-text(null, '.#{$owf-widget-field_class-name}__feedback', lighter);
+        //}
+        
+        &#{&}--align-left {
+            text-align: left;
+        }
+    }
+    &__item {
+        margin-top: $owf-base_padding_small;
+        margin-bottom: $owf-base_padding_medium;
+        position: relative;
+    }
+    
+    &#{&}--show-label { // this might be deprecated in favor of --label
+        > .#{$owf-widget-field_class-name} {
+            &__label {
+                top: 0;
+                opacity: 1;
+            }
+        }
+    }
+    &#{&}--padded-label {
+        > .#{$owf-widget-field_class-name} {
+            &__label {
+                top: -4px;
+            }
+        }
+    }
+    &#{&}--animated-label {
+        > .#{$owf-widget-field_class-name} {
+            &__control {
+                &[required]:valid,
+                &[placeholder=""],
+                &:not([placeholder]),
+                &[data-show-label] {
+                    &  + .#{$owf-widget-field_class-name} {
+                        &__label {
+                            top: 0;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+            &__label {
+                top: $owf-base_padding_small;
+                opacity: 0;
+
+                transition-property: top, opacity;
+                transition-duration: $owf-base_transition-duration / 4;
+            }
+        }
+    }
+}

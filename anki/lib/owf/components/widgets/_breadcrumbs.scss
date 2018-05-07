@@ -1,0 +1,56 @@
+$owf-widget-breadcrumbs_name: breadcrumbs !default;
+$owf-widget-breadcrumbs_class-name: #{$owf-widget_class-name}-#{$owf-widget-breadcrumbs_name};
+
+&-#{$owf-widget-breadcrumbs_name} {
+
+    display: block;
+    padding: $owf-base_padding;
+    background: owf-color_get-shade($owf-color_background, lightest);
+    font-size: $owf-base_font-size;
+    border-top: $owf-base_border; //1px solid #eee;
+    box-shadow: $owf-base_box-shadow_h-shadow 5px 5px -2px $owf-base_box-shadow_color;
+    transition-property: padding;
+    transition-duration: $owf-base_transition-duration;
+
+    @include owf-sass_create-placeholderable-media-query(extra-small){
+        padding: $owf-base_padding_medium;
+    }
+
+    &__layout {
+        display : block;
+        @include owf-sass_extend-placeholder(owf-reset_list);
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+    }
+
+    
+    &-item {
+        @include owf-sass_extend-placeholder(owf-utility_float_left);
+        
+        &:not(:last-child) {
+            &:after {
+                content: "/";
+                padding: 0 $owf-base_padding_medium;
+            }
+        }
+        
+        &:last-child {
+            font-size: $owf-base_font-size_big;
+            padding-top: $owf-base_padding_small;
+            clear: both;
+            
+            @include owf-sass_create-placeholderable-media-query(extra-small) {
+                font-size: inherit;
+                padding-top: 0;
+                clear: none;
+            }
+            
+            //& > * {
+            //    color: black;
+            //}
+        }
+        
+        &__link {
+            color: owf-color_get-shade($owf-color_background, darker);
+        }
+    }
+}

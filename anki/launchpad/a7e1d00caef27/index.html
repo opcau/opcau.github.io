@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" ></meta>
+<script language="JavaScript" type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script>
+
+      function launchDrone()
+      {
+            var theUrl = 'http://ankiot.opcau.com:8888/drone-api/drone/rescueMode';
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "POST", theUrl, false ); // false for synchronous request
+            xmlHttp.setRequestHeader("Authorization", "Basic " + btoa('archer' + ":" + 'buccalRelease7^'));
+            var str = "{ 'primaryContact': {'id': 1992}, 'category':{ 'id': 243},'subject': 'Scheuled Flight'}";
+            var json = JSON.stringify(eval("(" + str + ")"));
+            xmlHttp.send(json);
+            console.log(xmlHttp.responseText);
+            alert('Flight Request Request Sent');
+   }
+</script>
+</head>
+<body>
+Click to Launch Drone
+<input type="submit" value="Launch" onclick="launchDrone()"/>
+</body>
+</html>

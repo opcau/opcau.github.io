@@ -1,0 +1,35 @@
+$owf-widget-header_class-name: #{$owf-widget_class-name}-header;
+
+&-header {
+    @extend %owf-utility_clearfix;
+    
+    line-height: $owf-base_row_height;
+    //border-bottom: $owf-base_border;
+    background: owf-color_get-shade($owf-color_background, lightest);
+    box-shadow: $owf-base_box-shadow;
+    transition-property: padding;
+    transition-duration: $owf-base_transition-duration;
+    //box-sizing: content-box;
+    
+    &__row {
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+        
+        height: $owf-base_row_height;
+        
+        &#{&}--shadowed {
+            position: relative;
+            z-index: $owf-base_z-index + 1;
+            box-shadow: $owf-base_box-shadow;
+        }
+        &#{&}--automatic-height {
+            height: auto;
+        }
+        &#{&}--padded {
+            padding: 0 $owf-base_padding;
+
+            @include owf-sass_create-placeholderable-media-query(extra-small){
+                padding: 0 $owf-base_padding_medium;
+            }
+        }
+    }
+}

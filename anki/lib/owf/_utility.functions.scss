@@ -1,0 +1,17 @@
+@function owf-utility_get-border-gradient($direction: horizontal, $color-shade: light) {
+    @if type-of($direction) != string {
+        @error 'Parameter $direction must be a string. Was "#{$direction}" (#{type-of($direction)}).';
+    }
+    
+    $linear-gradient-direction: null;
+    
+    @if $direction == horizontal {
+        $linear-gradient-direction: to right;
+    } @else if $direction == vertical {
+        $linear-gradient-direction: to bottom;
+    } @else {
+        @error 'Parameter $direction must be either "horizontal" or "vertical". Was "#{$direction}".';
+    }
+    
+    @return linear-gradient($linear-gradient-direction, rgba(255,255,255,0) -20%, owf-color_get-shade($owf-color_border, $color-shade) 50%, rgba(255,255,255,0) 120%) 1 stretch;
+}

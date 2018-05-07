@@ -1,0 +1,185 @@
+$owf-card_name: card !default;
+$owf-card_class-name: #{$owf-base_namespace}-#{$owf-card_name};
+
+$owf-card_height: $owf-base_row_height * 2;
+$owf-card__title_font-size: $owf-base_font-size_big * 19 / 24 !default;
+
+$owf-card-column_card-spacing: $owf-base_padding_medium!default;
+
+@at-root {
+    // Component-specific placeholders should be defined on the root
+    @include owf-sass_define-placeholders {
+        @include owf-sass_define-placeholder(owf-card__status--narrow){
+            width: $owf-card_height - $owf-base_border-width_thick;
+            min-width: $owf-card_height - $owf-base_border-width_thick;
+            max-width: $owf-card_height - $owf-base_border-width_thick;
+        }
+        @include owf-sass_define-placeholder(owf-card__status--compensate-for-thick-border){
+            > :first-child {
+                width: $owf-card_height;
+                margin-left: -1 * $owf-base_border-width_thick;
+            }
+        }
+    }
+}
+
+&-#{$owf-card_name} {
+    @extend %owf-utility_clearfix;
+    
+    height: auto;
+    position: relative;
+    box-shadow: $owf-base_box-shadow;
+    background: $owf-color_background_light;
+
+    transition-property: border;
+    transition-duration: $owf-base_transition-duration;
+    
+    @include owf-utility_style-html-element-for-selector(a){
+        @include owf-sass_extend-placeholder(owf-reset_anchor);
+        
+        cursor: pointer;
+        display: block;
+
+        //&:focus, &:active {
+        //    outline: $owf-base_outline;
+        //}
+    }
+    
+    &-column {
+        padding: $owf-base_padding;
+        transition-property: padding;
+        transition-duration: $owf-base_transition-duration;
+        
+        &-title {
+            @include owf-sass_extend-placeholder(owf-utility_text-overflow-ellipsis);
+            @include owf-sass_extend-placeholder(owf-utility_no-margin);
+            
+            height: $owf-base_row_height_medium;
+            line-height: $owf-base_row_height_medium;
+            margin-top: $owf-card-column_card-spacing;
+            padding: 0 $owf-base_padding_small;
+            font-size: $owf-base_font-size_medium;
+            color: owf-color_get-shade($owf-color_background, darker);
+            
+            &__icon {
+                margin-right: $owf-base_padding_small;
+            }
+            &__text {}
+            
+            &:first-child {
+                margin-top: -1 * $owf-base_padding + $owf-base_padding_small;
+            }
+        }
+        
+        & + & {
+            padding-left: 0;
+        }
+        
+        > .#{$owf-card_class-name} {
+            margin-top: $owf-card-column_card-spacing;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+        
+        @include owf-sass_create-placeholderable-media-query(extra-small){
+            padding: $owf-base_padding_small;
+            
+            &-title {
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+            
+            & + & {
+                padding-left: $owf-base_padding_small;
+            }
+        }
+
+        @include owf-modify_no-padding;
+    }
+    
+    &__title {
+        @include owf-modify_no-border;
+        
+        padding: $owf-base_padding; 
+        border-bottom: $owf-base_border;
+        text-align: left;
+        font-weight: 300;
+        font-size: $owf-card__title_font-size;
+    }
+    &__footer {
+        @include owf-modify_no-border;
+        
+        padding: $owf-base_padding; 
+        border-top: $owf-base_border;
+    }
+    &__layout {
+        &#{&}--table {
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+
+            > * {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+            .#{$owf-card_class-name} {
+                &__content {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    &__status {
+        width: $owf-card_height;
+        min-width: $owf-card_height;
+        max-width: $owf-card_height;
+        height: $owf-card_height;
+        min-height: $owf-card_height;
+        position: relative;
+        overflow: hidden;
+        font-size: $owf-card_height * 0.275; // 0.5 * 0.55
+    }
+    &__content {
+        position: relative;
+        overflow: visible; //hidden;
+
+        &#{&}--padded {
+            padding: $owf-base_padding;
+        }
+
+        &-layout {
+            > .#{$owf-base_namespace}-card__content {
+                @extend %owf-utility_no-padding;
+            }
+        }
+    }
+    
+    &#{&}--hide-status {
+        .#{$owf-card_class-name} {
+            &__status {
+                display: none;
+            }
+        }
+    }
+    
+    @include owf-modify_status-thick-border;
+    @include owf-utility-wrap-content-inside-status-modifiers {
+        .#{$owf-card_class-name} {
+            &__status {
+                @include owf-sass_extend-placeholder(owf-card__status--narrow);
+
+                &.#{$owf-card_class-name} {
+                    &__status {
+                        &--compensate-for-thick-border {
+                            @include owf-sass_extend-placeholder(owf-card__status--compensate-for-thick-border);
+                        }
+                    }
+                }
+            }
+        }
+    };
+}

@@ -1,0 +1,106 @@
+$owf-control-button_name: button !default;
+$owf-control-button_class-name: #{$owf-control_class-name}-#{$owf-control-button_name};
+
+&-#{$owf-control-button_name} {
+    @include owf-sass_extend-placeholder(owf-reset_anchor);
+        
+    display: inline-block;
+    color: $owf-color_text;
+    background: $owf-color_background_light;
+    border: $owf-base_border;
+    padding: $owf-base_padding_small $owf-base_padding_medium;
+    min-width: $owf-base_row_height_medium;
+    height: $owf-base_row_height_medium;
+    line-height: 2em;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background: $owf-color_status-default_background;
+    }
+
+    & + & {
+        margin-left: $owf-base_padding_small;
+    }
+
+    &#{&}--small {
+        padding: 0;
+        min-width: 2em;
+        min-height: 2em;
+        height: auto;
+        // Add this for centering small button? -> margin: 6px 0;
+    }
+
+    &#{&}--dropdown {
+        position: relative;
+
+        &:after {
+            content: "\025BE";
+            padding-left: $owf-base_padding_medium;
+        }
+
+        > .#{$owf-control_class-name} {
+            &-dropdown {
+                &__layout {
+                    color: $owf-color_text;
+                    text-align: left;
+
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &#{&}--no-border {
+        @include owf-sass_extend-placeholder(owf-utility_no-border);
+    }
+
+    &#{&}--no-caret {
+
+        &:after {
+            display: none;
+        }
+    }
+
+    &#{&}--no-margin-left { // only used within 'pager'
+        @include owf-sass_extend-placeholder(owf-utility_no-margin_left);
+
+        & + & {
+            //margin-left: -1px;
+            @include owf-sass_extend-placeholder(owf-utility_no-margin_left);
+            @include owf-sass_extend-placeholder(owf-utility_no-border_left);
+        }
+    }
+
+    &[disabled="disabled"],
+    &:disabled {
+        cursor: default;
+        color: owf-color_get-shade($owf-color_text, 55%);
+
+        &:hover {
+            background: inherit;
+        }
+    }
+
+    // is there a problem here with status --default ?
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{&}--#{$status} {
+            @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+            @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+            border-color: transparent;
+
+            &:hover {
+                $shade: 4%;
+                background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                //color: $owf-color_status-#{$status}_foreground;
+                @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+            }
+            &:focus {
+                @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+            }
+        }
+    }
+}

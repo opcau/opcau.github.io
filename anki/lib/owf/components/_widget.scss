@@ -1,0 +1,21 @@
+$owf-widget_name: widget !default;
+$owf-widget_class-name: #{$owf-base_namespace}-#{$owf-widget_name};
+
+&-#{$owf-widget_name} {
+    @import 'widgets/_loading.scss';
+    @import 'widgets/_header.scss';
+    @import 'widgets/_list.scss';
+    @import 'widgets/_footer.scss';
+    @import 'widgets/_brand.scss';
+    @import 'widgets/_bar.scss';
+    @import 'widgets/_bar-chart.scss';
+    @import 'widgets/_simple-content.scss';
+    @import 'widgets/_status.scss';
+    @import 'widgets/_split.scss';
+    @import 'widgets/_breadcrumbs.scss';
+    @import 'widgets/_modal.scss';
+    @import 'widgets/_table.scss';
+    @import 'widgets/_field.scss';
+    @import 'widgets/_fieldset.scss';
+    @import 'widgets/_status-control.scss';
+}

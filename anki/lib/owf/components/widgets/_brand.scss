@@ -1,0 +1,49 @@
+$owf-widget-brand_class-name: #{$owf-widget_class-name}-brand;
+$owf-widget-brand__text_font-size: $owf-base_font-size * 8/7 !default;
+$owf-widget-brand__brand_height: $owf-widget-brand__text_font-size;
+
+&-brand {
+    @include owf-reset_anchor(owf-color_get-shade($owf-color_text, lightest));
+    @extend %owf-utility_text-overflow-ellipsis;
+    
+    font-size: $owf-widget-brand__text_font-size;
+    font-weight: $owf-base_font-weight;
+    display: block;
+    transition-property: padding;
+    transition-duration: $owf-base_transition-duration;
+    
+    &__brand {
+        height: $owf-widget-brand__brand_height;
+        padding: ($owf-widget-brand__brand_height * $owf-base_line-height - $owf-widget-brand__brand_height) / 2 0;
+        box-sizing: content-box;
+    }
+    &__text {
+        
+    }
+    
+    &#{&}--float {
+        &-left {
+            float: left;
+        }
+        &-right {
+            float: right;
+        }
+    }
+    &#{&}--padded {
+        &-left {
+            padding-left: $owf-base_padding;
+        }
+        &-right {
+            padding-right: $owf-base_padding;
+        }
+        
+        @include owf-sass_create-placeholderable-media-query(extra-small){
+            &-left {
+                padding-left: $owf-base_padding_medium;
+            }
+            &-right {
+                padding-right: $owf-base_padding_medium;
+            }
+        }
+    }
+}

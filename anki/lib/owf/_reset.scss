@@ -1,0 +1,17 @@
+html, body {
+    @extend %owf-utility_no-margin-and-padding;
+    height: 100%;
+    
+    font-family: $owf-base_font-family;
+    font-weight: $owf-base_font-weight;
+    font-size: $owf-base_font-size;
+    color: $owf-color_text;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+th {
+    font-weight: normal;
+}

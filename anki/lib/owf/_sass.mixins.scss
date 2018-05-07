@@ -1,0 +1,39 @@
+////
+/// @group sass
+/// @author mimisanc
+////
+
+/// Creates media query blocks based upon the values of `$placeholderable-media-queries`.
+/// @content Mixin expects `@content` to be passed. Passed `@content` will be placed on the body of each one of the generated media queries.
+/// @param {String}  $placeholderable-media-queries...  - The media query names to get `@content` into.
+/// @todo Validate the values in `$placeholderable-media-queries` to be only values in the `$owf-sass_placeholderable-media-queries` map
+/// @output One or more media query blocks described by the values in the `$owf-sass_placeholderable-media-queries` map containing the passed `@content`.
+@mixin owf-sass_create-placeholderable-media-query($placeholderable-media-queries...) {
+    @each $key, $value in $placeholderable-media-queries {
+        $owf-sass_current-placeholderable-media-query: $key !global;
+        
+        @media #{map-get($owf-sass_placeholderable-media-queries, $key)}{ 
+            @content; 
+        }
+        
+        $owf-sass_current-placeholderable-media-query: null !global;
+    }
+}
+@mixin owf-sass_define-placeholder($name) {
+    %#{owf-sass_get-current-media-query-placeholder-name($name)} {
+        @content;
+    }
+}
+@mixin owf-sass_define-placeholders(){
+    @content;
+    @each $key, $value in $owf-sass_placeholderable-media-queries {
+        @include owf-sass_create-placeholderable-media-query($key){
+            @content;
+        }
+    }
+}
+@mixin owf-sass_extend-placeholder($name){
+    & { 
+        @extend %#{owf-sass_get-current-media-query-placeholder-name($name)};    
+    }
+}

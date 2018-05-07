@@ -1,0 +1,36 @@
+$owf-control-radio_name: radio !default;
+$owf-control-radio_class-name: #{$owf-control_class-name}-#{$owf-control-radio_name};
+
+&-#{$owf-control-radio_name} {
+    @include owf-sass_extend-placeholder(owf-utility_no-margin);
+    
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    display: inline-block;
+    border: $owf-base_border;
+    border-radius: 100%;
+    width: 18px;
+    height: 18px;
+    //margin: 0;
+    background-clip: content-box;
+    background-color: #fdfdfd;
+
+    vertical-align: top;
+    
+    /*padding: 7px;
+    transition-property: border, padding;
+    transition-duration: $owf-base_transition-duration;*/
+
+    &:checked {
+        border-color: $owf-color_status-primary_background;
+        background-color: $owf-color_status-primary_background;
+        border-width: 2px;
+        padding: 2px;
+    }
+    
+    &#{&}--disabled {
+        cursor: not-allowed;
+    }
+}

@@ -1,0 +1,366 @@
+$owf-controls_name: controls !default;
+$owf-controls_class-name: #{$owf-base_namespace}-#{$owf-controls_name};
+
+&-#{$owf-controls_name} {
+    
+    &-search {
+        & + & {
+            padding-left: $owf-base_padding_small;
+        }
+        
+        & + .#{$owf-controls_class-name} {
+            &-group {
+                padding-left: $owf-base_padding_small;
+            }
+        }
+    }
+    
+    &__input {
+        height: $owf-base_row_height_medium;
+        padding: $owf-base_padding_small $owf-base_padding_medium;
+        border: $owf-base_border;
+        width: 100%;
+        margin-bottom: $owf-base_padding_small;
+    }
+    
+    &__select {
+        height: $owf-base_row_height_medium;
+        padding: $owf-base_padding_small 26px $owf-base_padding_small $owf-base_padding_medium;
+        border: $owf-base_border;
+        margin-bottom: $owf-base_padding_small;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border-radius: 0;
+        background-color: $owf-color_background_light;
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMiIKICAgaGVpZ2h0PSIxMTIiCiAgIHdpZHRoPSI1NzIiPgogIDxkZWZzCiAgICAgaWQ9ImRlZnM0IiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTciPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE5MC45NDg4NiwtMzIxLjQwMTAxKSIKICAgICBpZD0ibGF5ZXIxIj4KICAgIDxwYXRoCiAgICAgICBpZD0icGF0aDMwNTYiCiAgICAgICBkPSJtIDQyMCwzMjIuMzYyMTggMTIxLjg3NSwwIC02NSwxMTAgLTY1LC0xMTAgeiIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjEuMDU2OTcwOTVweDtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2Utb3BhY2l0eToxIiAvPgogIDwvZz4KPC9zdmc+Cg==);
+        background-repeat: no-repeat;
+        background-position: 100% 50%;
+        background-size: 26px;
+        background-origin: padding-box;
+
+        &#{&}--width-full {
+            width: 100%;
+        }
+    }
+    
+    &__button {
+        @include owf-sass_extend-placeholder(owf-reset_anchor);
+        
+        display: inline-block;
+        color: $owf-color_text;
+        background: $owf-color_background_light;
+        border: $owf-base_border;
+        padding: $owf-base_padding_small $owf-base_padding_medium;
+        min-width: $owf-base_row_height_medium;
+        height: $owf-base_row_height_medium;
+        line-height: 2em;
+        text-align: center;
+        cursor: pointer;
+        
+        &:hover {
+            background: $owf-color_status-default_background;
+        }
+        
+        & + & {
+            margin-left: $owf-base_padding_small;
+        }
+        
+        &#{&}--small {
+            padding: 0;
+            min-width: 2em;
+            min-height: 2em;
+            height: auto;
+            // Add this for centering small button? -> margin: 6px 0;
+        }
+        
+        &#{&}--dropdown {
+            position: relative;
+            
+            &:after {
+                content: "\025BE";
+                padding-left: $owf-base_padding_medium;
+            }
+            
+            > .#{$owf-controls_class-name} {
+                &-dropdown {
+                    &__layout {
+                        color: $owf-color_text;
+                        text-align: left;
+                        
+                        position: absolute;
+                        bottom: 0px;
+                        left: 0px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        
+        &#{&}--no-border {
+            @include owf-sass_extend-placeholder(owf-utility_no-border);
+        }
+        
+        &#{&}--no-caret {
+            
+            &:after {
+                display: none;
+            }
+        }
+        
+        &#{&}--no-margin-left { // only used within 'pager'
+            @include owf-sass_extend-placeholder(owf-utility_no-margin_left);
+            
+            & + & {
+                //margin-left: -1px;
+                @include owf-sass_extend-placeholder(owf-utility_no-margin_left);
+                @include owf-sass_extend-placeholder(owf-utility_no-border_left);
+            }
+        }
+        
+        //&#{&}--disabled
+        &[disabled="disabled"],
+        &:disabled {
+            cursor: default;
+            color: owf-color_get-shade($owf-color_text, 55%);
+            
+            &:hover {
+                background: inherit;
+            }
+        }
+        
+        //@include owf-modify_status-background(); // this is a right way, but does not support :hover
+        
+        @each $status, $color in $owf-color_status-modifiers-map_background {
+            &#{&}--#{$status} {
+                @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+                border-color: transparent;
+
+                &:hover {
+                    $shade: 4%;
+                    background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                }
+            }
+        }
+    }
+    
+    &-group {
+        display: table;
+        margin-bottom: $owf-base_padding_small;
+        
+        > * {
+            display: table-cell;
+            vertical-align: top;
+        }
+        
+        .#{$owf-controls_class-name} {
+            
+            &-search {
+                width: 100%;
+                
+                &:first-child {
+                    .#{$owf-controls_class-name} {
+                        &__input {
+                            border-left: $owf-base_border;
+                        }
+                    }
+                }
+            }
+            
+            &__input {
+                border-left: none;
+            }
+            
+            &__button {
+                min-width: $owf-base_row_height_medium;
+                height: $owf-base_row_height_medium;
+                padding: $owf-base_padding_small $owf-base_padding_medium;
+                border-left: none;
+                
+                &:first-child {
+                    border-left: $owf-base_border;
+                }
+            }
+        }
+        
+        & + & {
+            padding-left: $owf-base_padding_small;
+        }
+        
+        & + .#{$owf-controls_class-name} {
+            &-search {
+                padding-left: $owf-base_padding_small;
+            }
+        }
+    }
+    
+    &-filters {
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+        display: block;
+        
+        &-collapse {
+            &__input {
+                width: $owf-base_row_height_small;
+                height: 22px;
+                margin: 0;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                
+                &:checked {
+                    ~ .#{$owf-controls_class-name} {
+                        &-filters {
+                            &-collapse {
+                                &__label {
+                                    transform: rotate(270deg);
+                                }
+                            }
+                            
+                            &-list {
+                                .#{$owf-controls_class-name} {
+                                    &-filters {
+                                        &-item {
+                                            display: inline-block;
+                                            
+                                            &-toggle {
+                                                &__input {
+                                                    display: none;
+                                                    
+                                                    &:checked {
+                                                        ~ .#{$owf-controls_class-name} {
+                                                            &-filters {
+                                                                &-item {
+                                                                    &-description {
+                                                                        color: $owf-color_text;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            &-description {
+                                                padding: 0 $owf-base_padding_small;
+                                                width: auto;
+                                                color: owf-color_get-shade($owf-color_text, 55%);
+                                            }
+                                            
+                                            &-button {
+                                                display: none;
+                                            }
+                                            
+                                            .#{$owf-controls_class-name} {
+                                                &-button {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                &#{&}--float-left {
+                    float: left;
+                    margin-right: -1 * $owf-base_row_height_small;
+                }
+            }
+            
+            &__label {
+                width: $owf-base_row_height_small;
+                height: $owf-base_row_height_small;
+                margin: 0;
+                cursor: pointer;
+                text-align: center;
+                font-size: 18px;
+                overflow: hidden;
+                
+                padding-top: 4px;
+                
+                &#{&}--float-left {
+                    float: left;
+                }
+            }
+        }
+        
+        &-list {
+            margin-left: $owf-base_row_height_small + 10px;
+            padding-top: 2px;
+        }
+        
+        &-item {
+            display: block;
+            margin-bottom: $owf-base_padding_small;
+            
+            &-toggle {
+                &__input {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    border: $owf-base_border;
+                    border-radius: 3px;
+                    width: 18px;
+                    height: 18px;
+                    margin: 0;
+                    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgdmVyc2lvbj0iMS4xIgogICB3aWR0aD0iMS44OTQyODA5aW4iCiAgIGhlaWdodD0iMS41NjA5NDc1aW4iCiAgIGlkPSJzdmcyIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNCIgLz4KICA8bWV0YWRhdGEKICAgICBpZD0ibWV0YWRhdGE3Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8ZwogICAgIGlkPSJsYXllcjEtNSIKICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1OS43NTczNiwtMjk2LjExOTU0KSI+CiAgICA8cGF0aAogICAgICAgZD0ibSAxOTAsNDEyLjM2MjE4IDIwLDIwIDExNiwtMTE2IC0xNiwtMTYgLTEwMCwxMDAgLTMwLC0zMCAtMTYsMTYgeiIKICAgICAgIGlkPSJwYXRoMjk4OS02IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6NjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogIDwvZz4KPC9zdmc+Cg==);
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                    background-size: 0;
+                    background-clip: content-box;
+                    background-color: #fdfdfd;
+                    
+                    vertical-align: top;
+                    
+                    &:checked {
+                        background-size: 14px;
+                        border: transparent;
+                        background-color: $owf-color_status-primary_background;
+                    }
+                }
+            }
+            
+            &-description {
+                display: inline-block;
+                margin: 0;
+                padding: 0 $owf-base_padding_medium;
+                width: 300px;
+                font-weight: $owf-base_font-weight;
+                line-height: 2;
+            }
+            
+            .#{$owf-controls_class-name} {
+                &-button {
+                    * {
+                        margin: 0;
+                        line-height: inherit;
+                    }
+                }
+            }
+            
+            &-button {
+                background: none;
+                border: none;
+                font-size: 8px;
+                font-weight: bold;
+                text-align: center;
+                vertical-align: middle;
+                padding: 6px;
+                
+                line-height: 2;
+                
+                &:before {
+                    content: "\2573";
+                }
+                
+                &:hover {
+                    color: $owf-color_status-danger_background;
+                }
+            }
+        }
+    }
+}

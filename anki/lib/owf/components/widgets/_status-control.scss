@@ -1,0 +1,14 @@
+$owf-widget-status-control_name: status-control !default;
+$owf-widget-status-control_class-name: #{$owf-widget_class-name}-#{$owf-widget-status-control_name};
+
+&-#{$owf-widget-status-control_name} {
+    
+    &-label {
+        @include owf-sass_extend-placeholder(owf-utility_no-margin);
+        
+        font-size: $owf-base_font-size;
+        font-weight: $owf-base_font-weight_medium;
+        //margin-top: 4px;
+        padding: $owf-base_padding_extra-small;
+    }
+}

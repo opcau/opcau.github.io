@@ -1,0 +1,30 @@
+$owf-widget-fieldset_name: fieldset !default;
+$owf-widget-fieldset_class-name: #{$owf-widget_class-name}-#{$owf-widget-fieldset_name};
+
+&-#{$owf-widget-fieldset_name} {
+    @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+    @include owf-sass_extend-placeholder(owf-utility_no-border);
+    
+    display: block;
+    border-top: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_status-default_background, dark);
+    //margin-top: 2px; this one would be used in case we changed the styles to something more UX-friendly
+    
+    &__title {
+        padding: 0 $owf-base_padding;
+        margin: $owf-base_padding 0;
+        text-align: left;
+        font-weight: 300;
+        font-size: $owf-card__title_font-size - 1;
+    }
+    
+    &__content {
+        padding: 0;
+        margin: $owf-base_padding 0;
+        
+        &#{&}--padded {
+            padding-left: $owf-base_padding;
+            padding-right: $owf-base_padding;
+            padding-bottom: $owf-base_padding;
+        }
+    }
+}

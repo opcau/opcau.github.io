@@ -1,0 +1,31 @@
+@function owf-color_get-shade($color, $shade){
+    $result: $color;
+    
+    @if owf-sass_list-contains-value($owf-color_valid-color-shades, $shade) {
+        @if $shade == dark {
+            $result: darken($result, 20%);
+        } @else if $shade == darker {
+            $result: darken($result, 44%); // 20% darker than the "dark" shade
+        } @else if $shade == darkest {
+            $result: darken($result, 72.8%); // 20% darker than the "darker" shade
+        } @else if $shade == light {
+            $result: lighten($result, 5%);
+        }  @else if $shade == lighter {
+            $result: lighten($result, 10.25%); // 5% lighter than the "light" shade
+        } @else if $shade == lightest {
+            $result: lighten($result, 15.7625%); // 5% lighter than the "lighter" shade
+        }
+    } @else if type-of($shade) == number and ($shade >= -100 and $shade <= 100) {
+        @if $shade >= 0 {
+            $result: lighten($result, $shade);
+        } @else {
+            $result: darken($result, $shade * -1);
+        }
+    }
+    
+    @return $result;
+}
+@function owf-color_get-text-color-for-background($background){
+    $yiqLuminance: (299 * red($background) + 587 * green($background) + 114 * blue($background)) / 1000;
+    @return if($yiqLuminance >= 128, black, white);
+}

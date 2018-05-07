@@ -1,0 +1,35 @@
+$owf-control-checkbox_name: checkbox !default;
+$owf-control-checkbox_class-name: #{$owf-control_class-name}-#{$owf-control-checkbox_name};
+
+&-#{$owf-control-checkbox_name} {
+    @include owf-sass_extend-placeholder(owf-utility_no-margin);
+    
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    display: inline-block;
+    border: $owf-base_border;
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
+    //margin: 0;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgdmVyc2lvbj0iMS4xIgogICB3aWR0aD0iMS44OTQyODA5aW4iCiAgIGhlaWdodD0iMS41NjA5NDc1aW4iCiAgIGlkPSJzdmcyIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNCIgLz4KICA8bWV0YWRhdGEKICAgICBpZD0ibWV0YWRhdGE3Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8ZwogICAgIGlkPSJsYXllcjEtNSIKICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1OS43NTczNiwtMjk2LjExOTU0KSI+CiAgICA8cGF0aAogICAgICAgZD0ibSAxOTAsNDEyLjM2MjE4IDIwLDIwIDExNiwtMTE2IC0xNiwtMTYgLTEwMCwxMDAgLTMwLC0zMCAtMTYsMTYgeiIKICAgICAgIGlkPSJwYXRoMjk4OS02IgogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6NjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogIDwvZz4KPC9zdmc+Cg==);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 0;
+    background-clip: content-box;
+    background-color: #fdfdfd;
+
+    vertical-align: top;
+
+    &:checked {
+        background-size: 14px;
+        border: transparent;
+        background-color: $owf-color_status-primary_background;
+    }
+    
+    &#{&}--disabled {
+        cursor: not-allowed;
+    }
+}

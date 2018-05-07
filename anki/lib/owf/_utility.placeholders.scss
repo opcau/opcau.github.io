@@ -1,0 +1,152 @@
+@include owf-sass_define-placeholders {
+    @include owf-sass_define-placeholder(owf-utility_clearfix){
+        &:after {
+            // Older browsers do not support empty content
+            content: " ";
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+        }
+    }
+    @include owf-sass_define-placeholder(owf-utility_text-overflow-ellipsis){
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    
+    // %owf-utility_no-margin
+    // %owf-utility_no-margin_top
+    // %owf-utility_no-margin_right
+    // %owf-utility_no-margin_bottom
+    // %owf-utility_no-margin_left
+    // %owf-utility_no-padding
+    // %owf-utility_no-padding_top
+    // %owf-utility_no-padding_right
+    // %owf-utility_no-padding_bottom
+    // %owf-utility_no-padding_left
+    @each $property in (margin, padding) {
+        @each $side in join(null, $owf-utility_sides) {
+            @include owf-sass_define-placeholder(owf-utility_no-#{$property}#{if($side == null, null, "_")}#{$side}){
+                #{$property}#{if($side == null, null, "-")}#{$side}: 0;
+            }
+        }
+    }
+    // %owf-utility_no-margin-and-padding
+    // %owf-utility_no-margin-and-padding_top
+    // %owf-utility_no-margin-and-padding_right
+    // %owf-utility_no-margin-and-padding_bottom
+    // %owf-utility_no-margin-and-padding_left
+    @each $side in join(null, $owf-utility_sides) {
+        $current-placeholder-suffix: #{if($side == null, null, "_")}#{$side};
+        
+        @include owf-sass_define-placeholder(owf-utility_no-margin-and-padding#{$current-placeholder-suffix}){
+            @include owf-sass_extend-placeholder(owf-utility_no-margin#{$current-placeholder-suffix});
+            @include owf-sass_extend-placeholder(owf-utility_no-padding#{$current-placeholder-suffix});
+        }
+    }
+    // %owf-utility_no-border
+    // %owf-utility_no-border_top
+    // %owf-utility_no-border_right
+    // %owf-utility_no-border_bottom
+    // %owf-utility_no-border_left
+    @each $side in join(null, $owf-utility_sides) {
+        @include owf-sass_define-placeholder(owf-utility_no-border#{if($side == null, null, "_")}#{$side}){
+            border#{if($side == null, null, "-")}#{$side}: none;
+        }
+    }
+    // %owf-utility_border
+    // %owf-utility_border_top
+    // %owf-utility_border_right
+    // %owf-utility_border_bottom
+    // %owf-utility_border_left
+    @each $side in join(null, $owf-utility_sides) {
+        @include owf-sass_define-placeholder(owf-utility_border#{if($side == null, null, "_")}#{$side}){
+            border#{if($side == null, null, "-")}#{$side}: $owf-base_border;
+        }
+    }
+    // %owf-utility_float_left
+    // %owf-utility_float_right
+    // %owf-utility_float_none
+    @each $value in $owf-utility_valid-float-values {
+        @include owf-sass_define-placeholder(owf-utility_float_#{$value}){
+            float: $value;
+        }
+    }
+    // %owf-utility_clear_left
+    // %owf-utility_clear_right
+    // %owf-utility_clear_none
+    // %owf-utility_clear_both
+    @each $value in $owf-utility_valid-clear-values {
+        @include owf-sass_define-placeholder(owf-utility_clear_#{$value}){
+            clear: $value;
+        }
+    }
+    
+    // %owf-utility_status-border
+    @include owf-sass_define-placeholder(owf-utility_status-border){
+        position: relative;
+        padding-left: $owf-base_border-width_thick;
+        
+        &:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            width: $owf-base_border-width_thick;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    
+    // %owf-utility_thick-border_color_default
+    // %owf-utility_thick-border_color_primary
+    // %owf-utility_thick-border_color_info
+    // %owf-utility_thick-border_color_success
+    // %owf-utility_thick-border_color_warning
+    // %owf-utility_thick-border_color_danger
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        @include owf-sass_define-placeholder(owf-utility_thick-border_color_#{$status}){
+            &:before {
+                background: $color;
+            }
+        }
+    }
+    
+    // %owf-utility_status-background_default
+    // %owf-utility_status-background_primary
+    // %owf-utility_status-background_info
+    // %owf-utility_status-background_success
+    // %owf-utility_status-background_warning
+    // %owf-utility_status-background_danger
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        @include owf-sass_define-placeholder(owf-utility_status-background_#{$status}){
+            background: if($status == default, owf-color_get-shade($color, lightest), $color);
+        }
+    }
+    
+    // %owf-utility_status-foreground_default
+    // %owf-utility_status-foreground_primary
+    // %owf-utility_status-foreground_info
+    // %owf-utility_status-foreground_success
+    // %owf-utility_status-foreground_warning
+    // %owf-utility_status-foreground_danger
+    @each $status, $color in $owf-color_status-modifiers-map_foreground {
+        @include owf-sass_define-placeholder(owf-utility_status-foreground_#{$status}){
+            color: $color;
+        }
+    }
+    
+    // %owf-utility_status-text_default
+    // %owf-utility_status-text_primary
+    // %owf-utility_status-text_info
+    // %owf-utility_status-text_success
+    // %owf-utility_status-text_warning
+    // %owf-utility_status-text_danger
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        @include owf-sass_define-placeholder(owf-utility_status-text_#{$status}){
+            color: if($status == default, owf-color_get-shade($color, dark), $color);
+        }
+    }
+}

@@ -1,0 +1,38 @@
+$owf-control-datetime_name: datetime !default;
+$owf-control-datetime_class-name: #{$owf-control_class-name}-#{$owf-control-datetime_name};
+
+&-#{$owf-control-datetime_name} {
+    @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+    @include owf-sass_extend-placeholder(owf-utility_no-border);
+    
+    width: 100%;
+    padding: $owf-base_padding_extra-small;
+    padding-bottom: $owf-base_padding_extra-small + $owf-base_border-width;
+    display: block;
+    outline: none;
+    font-size: $owf-base_font-size_medium;
+    font-weight: $owf-base_font-weight_medium;
+    border-bottom: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_status-default_background, dark);
+    
+    &:focus {
+        padding-bottom: $owf-base_padding_extra-small;
+        border-bottom: $owf-base_border-width_medium $owf-base_border-style $owf-color_status-primary_background;
+    }
+    
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{&}--#{$status} {
+            border-bottom-color: if($status == default, owf-color_get-shade($color, dark), $color);
+        }
+    }
+    
+    &#{&}--disabled {
+        color: owf-color_get-shade(map-get($owf-color_status-modifiers-map_background, default), -25%);
+        background-color: transparent;
+        cursor: default;
+        
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+}

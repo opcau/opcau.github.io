@@ -1,0 +1,39 @@
+$owf-color_valid-color-shades: (lightest, lighter, light, dark, darker, darkest);
+
+$owf-color_border: #ececec !default;
+$owf-color_text: #333 !default;
+$owf-color_background: #dfdfdf !default;
+$owf-color_background_light: #fff !default;
+$owf-color_outline: #3879d9;
+
+$owf-color_status-default_background: $owf-color_border !default;
+$owf-color_status-primary_background: #337ab7 !default;
+$owf-color_status-success_background: #5cb85c !default;
+$owf-color_status-info_background: #5bc0de !default;
+$owf-color_status-warning_background: #f0ad4e !default;
+$owf-color_status-danger_background: #d9534f !default;
+
+$owf-color_status-default_foreground: $owf-color_text !default;
+$owf-color_status-primary_foreground: #fff !default;
+$owf-color_status-success_foreground: #fff !default;
+$owf-color_status-info_foreground: #fff !default;
+$owf-color_status-warning_foreground: #fff !default;
+$owf-color_status-danger_foreground: #fff !default;
+
+$owf-color_status-modifiers-map_background: (
+    default:   $owf-color_status-default_background, 
+    primary:   $owf-color_status-primary_background, 
+    success:   $owf-color_status-success_background, 
+    info:      $owf-color_status-info_background, 
+    warning:   $owf-color_status-warning_background, 
+    danger:    $owf-color_status-danger_background
+);
+
+$owf-color_status-modifiers-map_foreground: (
+    default:   $owf-color_status-default_foreground, 
+    primary:   $owf-color_status-primary_foreground, 
+    success:   $owf-color_status-success_foreground, 
+    info:      $owf-color_status-info_foreground, 
+    warning:   $owf-color_status-warning_foreground, 
+    danger:    $owf-color_status-danger_foreground
+);

@@ -1,0 +1,37 @@
+@import '_sass.functions.scss';
+@import '_sass.variables.scss';
+@import '_sass.mixins.scss';
+
+@import '_color.functions.scss';
+@import '_color.variables.scss';
+
+@import '_base.variables.scss';
+@import '_base.placeholders.scss';
+
+@import '_utility.functions.scss';
+@import '_utility.variables.scss';
+@import '_utility.mixins.scss';
+@import '_utility.placeholders.scss';
+
+@import '_modify.mixins.scss';
+
+@import '_reset.mixins.scss';
+@import '_reset.placeholders.scss';
+@import '_reset.scss';
+
+.#{$owf-base_namespace} {
+    @extend %owf-utility_clearfix;
+    
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    position: relative;
+    background: $owf-color_background;
+    
+    @import 'components/_card.scss';
+    
+    @import 'components/_widget.scss';
+    @import 'components/_control.scss';
+    
+    @import 'components/_controls.scss';
+}

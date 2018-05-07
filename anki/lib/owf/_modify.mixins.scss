@@ -1,0 +1,204 @@
+// --no-padding
+// --no-padding-top
+// --no-padding-right
+// --no-padding-bottom
+// --no-padding-left
+@mixin owf-modify_no-padding($selector: null) {
+    &#{&}--no-padding {
+        @include owf-utility_wrap-content-inside-selector($selector) {
+            @include owf-sass_extend-placeholder(owf-utility_no-padding);
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_no-padding_#{$side})
+                }
+            }
+        }
+    }
+}
+// --no-margin
+// --no-margin-top
+// --no-margin-right
+// --no-margin-bottom
+// --no-margin-left
+@mixin owf-modify_no-margin($selector: null) {
+    &#{&}--no-margin {
+        @include owf-utility_wrap-content-inside-selector($selector) {
+            @include owf-sass_extend-placeholder(owf-utility_no-margin);
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_no-margin_#{$side});
+                }
+            }
+        }
+    }
+}
+// --float-none
+// --float-left
+// --float-right
+@mixin owf-modify_float($selector: null) {
+    &#{&}--float {
+        @each $side in $owf-utility_valid-float-values {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_float_#{$side});
+                }
+            }
+        }
+    }
+}
+// --clear-none
+// --clear-left
+// --clear-right
+// --clear-both
+@mixin owf-modify_clear($selector: null) {
+    &#{&}--clear {
+        @each $side in $owf-utility_valid-clear-values {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_clear_#{$side});
+                }
+            }
+        }
+    }
+}
+// --border
+// --border-top
+// --border-right
+// --border-bottom
+// --border-left
+@mixin owf-modify_border($selector: null) {
+    &#{&}--border {
+        @include owf-utility_wrap-content-inside-selector($selector) {
+            @include owf-sass_extend-placeholder(owf-utility_border);
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_border_#{$side});
+                }
+            }
+        }
+    }
+}
+// --no-border
+// --no-border-top
+// --no-border-right
+// --no-border-bottom
+// --no-border-left
+@mixin owf-modify_no-border($wrapping-selector: null, $element-selector: null) {
+    &#{if($element-selector != null, $element-selector, &)}--no-border {
+        @include owf-utility_wrap-content-inside-selector($wrapping-selector) {
+            @include owf-sass_extend-placeholder(owf-utility_no-border);
+        }
+        
+        @each $side in $owf-utility_sides {
+            &-#{$side} {
+                @include owf-utility_wrap-content-inside-selector($wrapping-selector) {
+                    @include owf-sass_extend-placeholder(owf-utility_no-border_#{$side});
+                }
+            }
+        }
+    }
+}
+// Status borders
+// --default
+// --info
+// --primary
+// --success
+// --warning
+// --danger
+@mixin owf-modify_status-thick-border($wrapping-selector: null, $element-selector: null, $shade: null) {
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{if($element-selector != null, $element-selector, &)}--#{$status} {
+            @include owf-utility_wrap-content-inside-selector($wrapping-selector) {
+                @include owf-sass_extend-placeholder(owf-utility_status-border);
+                
+                @if $shade != null {
+                    &:before {
+                        background: owf-color_get-shade($color, $shade);
+                    }
+                } @else {
+                    @include owf-sass_extend-placeholder(owf-utility_thick-border_color_#{$status});
+                }
+            }
+        }
+    }
+}
+
+// Status background
+// --default
+// --info
+// --primary
+// --success
+// --warning
+// --danger
+@mixin owf-modify_status-background($wrapping-selector: null, $element-selector: null, $shade: null) {
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{if($element-selector != null, $element-selector, &)}--#{$status} {
+            @include owf-utility_wrap-content-inside-selector($wrapping-selector){
+                @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                
+                @if $shade != null {
+                    background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                }
+            }
+        }
+    }
+}
+
+// Status background and foreground
+// --default
+// --info
+// --primary
+// --success
+// --warning
+// --danger
+@mixin owf-modify_status-background-and-foreground($wrapping-selector: null, $element-selector: null, $shade: null, $calculate-foreground-color: false) {
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{if($element-selector != null, $element-selector, &)}--#{$status} {
+            @include owf-utility_wrap-content-inside-selector($wrapping-selector){
+                @if $shade != null {
+                    $color: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                    
+                    background: $color;
+                } @else {
+                    @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                }
+                
+                @if $calculate-foreground-color {
+                    color: owf-color_get-text-color-for-background($color);
+                } @else {
+                    @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+                }
+            }
+        }
+    }
+}
+
+// Status text
+// --default
+// --info
+// --primary
+// --success
+// --warning
+// --danger
+@mixin owf-modify_status-text($wrapping-selector: null, $element-selector: null, $shade: null) {
+    @each $status, $color in $owf-color_status-modifiers-map_background {
+        &#{if($element-selector != null, $element-selector, &)}--#{$status} {
+            @include owf-utility_wrap-content-inside-selector($wrapping-selector){
+                @include owf-sass_extend-placeholder(owf-utility_status-text_#{$status});
+                
+                @if $shade != null {
+                    color: owf-color_get-shade(if($status == default, owf-color_get-shade($color, dark), $color), $shade);
+                }
+            }
+        }
+    }
+}

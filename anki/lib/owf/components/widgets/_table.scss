@@ -1,0 +1,221 @@
+$owf-widget-table_name: table !default;
+$owf-widget-table_class-name: #{$owf-widget_class-name}-#{$owf-widget-table_name};
+
+&-#{$owf-widget-table_name} {
+    @include owf-modify_no-margin;
+    
+    width: 100%;
+    max-width: 100%;
+    margin-top: $owf-base_padding_medium;
+    
+    &-row {
+        color: $owf-color_text;
+    }
+    
+    &-cell {
+        @include owf-modify_no-padding;
+        
+        padding: $owf-base_padding_medium;
+        line-height: $owf-base_line-height;
+        border-top: $owf-base_border;
+    }
+    
+    &-header {
+        @include owf-modify_no-padding;
+        
+        padding: $owf-base_padding_medium 2em $owf-base_padding_medium $owf-base_padding_medium;
+        line-height: $owf-base_line-height;
+        border-bottom: $owf-base_border;
+        position: relative;
+        
+        &__text {
+            text-transform: capitalize;
+        }
+        
+        &__icon {
+            position: absolute; // glyphicon is overriding this property; fix it or put glyphicon as a child
+            top: 30%; // glyphicon is overriding this property; fix it or put glyphicon as a child
+            right: $owf-base_padding_medium;
+        }
+        
+        &#{&}--sortable {
+            &:hover {
+                background: $owf-color_status-default_background;
+                color: $owf-color_status-default_foreground;
+                cursor: pointer;
+            }
+        }
+    }
+    
+    &#{&}--row-hover {
+        .#{$owf-widget-table_class-name} {
+            &-row {
+                &:hover {
+                    background: $owf-color_status-default_background;
+                    color: $owf-color_status-default_foreground;
+                }
+            }
+        }
+    }
+    
+    &#{&}--row-status-strong {
+        //@include owf-modify_status-background-and-foreground(".#{$owf-widget-table_class-name}-cell", " .#{$owf-widget-table_class-name}-row"); // this is the best of the three (see below)
+        //@include owf-modify_status-background-and-foreground(":hover", ".#{$owf-widget-table_class-name}-row");
+        //@include owf-modify_status-background-and-foreground(null, " .#{$owf-widget-table_class-name}-row:hover", 4%);
+        
+        .#{$owf-widget-table_class-name} {
+            &-row {
+                @each $status, $color in $owf-color_status-modifiers-map_background {
+                    &--#{$status} {
+                        @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                        @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+                        
+                        //&:hover {
+                        //    $shade: 4%;
+                        //    background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                        //}
+                    }
+                }
+            }
+        }
+        
+        &.#{$owf-widget-table_class-name} {
+            &--row-hover {
+                .#{$owf-widget-table_class-name} {
+                    &-row {
+                        @each $status, $color in $owf-color_status-modifiers-map_background {
+                            &--#{$status} {
+                                &:hover {
+                                    $shade: 4%;
+                                    background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                                    color: map-get($owf-color_status-modifiers-map_foreground, $status);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--row-status-light {
+        .#{$owf-widget-table_class-name} {
+            &-row {
+                @each $status, $color in $owf-color_status-modifiers-map_background {
+                    &--#{$status} {
+                        $shade: 30%;
+                        background: owf-color_get-shade(if($status == default, owf-color_get-shade($color, lightest), $color), $shade);
+                        
+                        //&:hover {
+                        //    @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                        //}
+                    }
+                }
+            }
+        }
+        &.#{$owf-widget-table_class-name} {
+            &--row-hover {
+                .#{$owf-widget-table_class-name} {
+                    &-row {
+                        @each $status, $color in $owf-color_status-modifiers-map_background {
+                            &--#{$status} {
+                                &:hover {
+                                    @include owf-sass_extend-placeholder(owf-utility_status-background_#{$status});
+                                    @include owf-sass_extend-placeholder(owf-utility_status-foreground_#{$status});
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--row-status-border {
+        .#{$owf-widget-table_class-name} {
+            &-row {
+                @each $status, $color in $owf-color_status-modifiers-map_background {
+                    &--#{$status} {
+                        .#{$owf-widget-table_class-name} {
+                            &-cell {
+                                &:first-child {
+                                    border-left: $owf-base_padding_small solid $color;
+                                    padding-left: $owf-base_padding_small;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--cell-no-border {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                @include owf-sass_extend-placeholder(owf-utility_no-border_top);
+            }
+        }
+    }
+    
+    &#{&}--h-align-left {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                text-align: left;
+            }
+        }
+    }
+
+    &#{&}--h-align-right {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                text-align: right;
+            }
+        }
+    }
+
+    &#{&}--h-align-center {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                text-align: center;
+            }
+        }
+    }
+
+    &#{&}--h-align-justify {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                text-align: justify;
+            }
+        }
+    }
+
+    &#{&}--v-align-top {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                vertical-align: top;
+            }
+        }
+    }
+
+    &#{&}--v-align-bottom {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                vertical-align: bottom;
+            }
+        }
+    }
+
+    &#{&}--v-align-middle {
+        .#{$owf-widget-table_class-name} {
+            &-cell {
+                vertical-align: middle;
+            }
+        }
+    }
+    
+    &#{&}--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,70 @@
+/*
+<div style="">
+    <i style="color: #797979; font-size: 40px; position: absolute; top: calc(50% - 20px); left: calc(50% - 20px);" class="fa fa-fw fa-spin fa-circle-o-notch"></i>
+</div>
+*/
+$owf-widget-loading_name: loading !default;
+$owf-widget-loading_class-name: #{$owf-widget_class-name}-#{$owf-widget-loading_name};
+
+$owf-widget-loading__content_font-size: 40px !default;
+
+@keyframes owf-widget-loading_expand-animation {
+    0% {
+        transform: scale(0);
+    }
+    15% {
+        transform: scale(0.9, 0.9);
+        background: $owf-color_background_light;
+    }
+    30% {
+        transform: scale(1, 1);
+        margin: 0 3px;
+        background: owf-color_get-shade($owf-color_background, dark);
+    }
+    75% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+&-#{$owf-widget-loading_name} {
+    position: absolute;
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0; 
+    background: $owf-color_background_light; 
+    z-index: $owf-base_z-index + 1;
+    
+    &__content {
+        position: absolute;
+        top: 50%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: transparentize($owf-color_background, 0.1); 
+        font-size: $owf-widget-loading__content_font-size; 
+        font-weight: 500;
+        line-height: 1;
+        
+        &#{&}--inset-text-shadow {
+            text-shadow: 1px 4px 6px $owf-color_background_light, 0 0 0 owf-color_get-shade($owf-color_background, darker), 1px 4px 6px $owf-color_background_light
+        }
+    }
+    &__circle {
+        height: 10px;
+        width: 10px;
+        display: none;
+        float: left;
+        border-radius: 100%;
+        animation: owf-widget-loading_expand-animation 2s infinite linear;
+        
+        @for $i from 1 through 5 {
+            &:nth-child(#{$i}) {
+                display: block;
+                animation-delay: #{$i * 0.1}s;
+            }
+        }
+    }
+}

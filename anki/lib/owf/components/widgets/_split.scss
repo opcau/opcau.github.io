@@ -1,0 +1,77 @@
+$owf-widget-split_name: split !default;
+$owf-widget-split_class-name: #{$owf-widget_class-name}-#{$owf-widget-split_name};
+$owf-widget-split_height: $owf-card_height;
+
+&-#{$owf-widget-split_name} {
+    width: 100%;
+    height: 100%;
+    min-height: $owf-widget-split_height;
+    display: table;
+    table-layout: fixed;
+    
+    &-item {
+        padding: $owf-base_padding;
+        display: table-cell;
+        overflow: hidden;
+        vertical-align: middle;
+        text-align: center;
+        
+        border-right: $owf-base_border;
+        
+        transition-property: background, color;
+        transition-duration: $owf-base_transition-duration / 2;
+        
+        &__content {
+            @extend %owf-base_font_big;
+        }
+        &__title {
+            @include owf-sass_extend-placeholder(owf-base_font_small);
+            
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+        }
+        
+        &:last-child {
+            border-right: none;
+            border-image: none;
+            border-right-width: 0;
+        }
+        
+        @each $modifier-name, $background-color in $owf-color_status-modifiers-map_background {
+            &#{&}--#{$modifier-name} {
+                &.#{$owf-widget-split_class-name} {
+                    &-item {
+                        &:after {
+                            content: "\25CF";
+                            display: block;
+                            color: $background-color;
+                        }
+
+                        &--hoverable {
+                            &:hover {
+                                background: $background-color;
+                                color: map-get($owf-color_status-modifiers-map_foreground, $modifier-name);
+
+                                &.#{$owf-widget-split_class-name} {
+                                    &-item {
+                                        &:after {
+                                            color: inherit;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &__row {
+        display: table-row;
+    }
+    
+    &#{&}--automatic-height {
+        min-height: 0;
+    }
+}

@@ -1,0 +1,27 @@
+$owf-widget-modal_name: modal !default;
+$owf-widget-modal_class-name: #{$owf-widget_class-name}-#{$owf-widget-modal_name};
+
+&-#{$owf-widget-modal_name} {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050; // change this value to a predefined, owf variable
+    display: none;
+    overflow: hidden;
+    outline: none;
+    background-color: rgba(owf-color_get-shade($owf-color_text, darkest), 0.5);
+    
+    &#{&}--displayed {
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    &__content {
+        @extend %owf-utility_clearfix;
+        
+        margin: $owf-base_row_height auto; // this might not be needed
+    }
+}

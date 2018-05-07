@@ -1,0 +1,13 @@
+@mixin owf-reset_anchor($anchor-color: inherit){
+    @if type-of($anchor-color) != string and type-of($anchor-color) != color {
+        @error 'Parameter $anchor-color must be either a string or a color. Was "#{$anchor-color}" (#{type-of($anchor-color)}).';
+    }
+    
+    color: $anchor-color;
+    text-decoration: none;
+    
+    &:hover, &:focus, &:active {
+        color: $anchor-color;
+        text-decoration: none;
+    }
+}

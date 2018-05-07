@@ -1,0 +1,651 @@
+$owf-widget-list_name: list !default;
+$owf-widget-list_class-name: #{$owf-widget_class-name}-#{$owf-widget-list_name};
+
+$owf-widget-list-item_height-modifiers-map: (
+    null: $owf-base_row_height,
+    medium: $owf-base_row_height_medium
+);
+$owf-widget-list-item_padding-modifiers-map: (
+    null: $owf-base_padding,
+    medium: $owf-base_padding_medium
+);
+$owf-widget-list--horizontal_owf-widget-list-item__icon_width-modifiers-map: (
+    null: $owf-base_row_height_medium,
+    medium: $owf-base_row_height_small
+);
+$owf-widget-list--horizontal_owf-widget-list-item__icon_padding-right-modifiers-map: (
+    null: $owf-base_padding_medium,
+    medium: $owf-base_padding_small
+);
+
+&-#{$owf-widget-list_name} {
+    
+    &__layout {
+        @include owf-sass_extend-placeholder(owf-reset_list);
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+        
+        display: block;
+    }
+    &-item {
+        @include owf-sass_extend-placeholder(owf-utility_border_bottom);
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+
+        display: block;
+        
+        &__layout {
+            @include owf-sass_extend-placeholder(owf-reset_anchor);
+            @include owf-sass_extend-placeholder(owf-utility_clearfix);
+
+            display: block;
+
+            &:hover {
+                background: owf-color_get-shade($owf-color_status-primary_background, 10%);
+                color: $owf-color_status-primary_foreground;
+            }
+
+            // where would this be located? use debug inside called function (_modify.mixins.scss)
+            //@include owf-modify_status-background-and-foreground(":hover", null, 4%);
+        }
+        
+        &#{&}--active {
+            background: $owf-color_status-primary_background;
+            color: $owf-color_status-primary_foreground; 
+
+            @include owf-modify_status-thick-border(null, ".#{$owf-widget-list_class-name}-item", -10%);
+            @include owf-modify_status-background-and-foreground(null, ".#{$owf-widget-list_class-name}-item");
+        }
+
+        &#{&}--dropdown {
+            position: relative;
+
+            &:hover {
+                //@include owf-modify_status-background-and-foreground("> .#{$owf-widget-list_class-name}-item__layout, > .#{$owf-widget-list_class-name}-item__action, > .#{$owf-widget-list_class-name}-item__layout > .#{$owf-widget-list_class-name}-item__action", null, 4%);
+
+                > .#{$owf-widget-list_class-name} {
+                    &-dropdown {
+                        display: block;
+                    }
+                }
+                > .#{$owf-widget-list_class-name} { // place this better (inside the one above)
+                    &-item {
+                        &__layout, &__action, &__layout .#{$owf-widget-list_class-name}-item__action {
+                            background: $owf-color_status-primary_background;
+                            color: $owf-color_status-primary_foreground;
+                        }
+                    }
+                }
+            }
+
+            > .#{$owf-widget-list_class-name} {
+                &-item {
+                    &__layout {
+
+                        > .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__text {
+                                    &:after {
+                                        content: "\025BE";
+                                        padding-left: 20px; // replace with a utlity variable ( $owf-base_padding )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // where would this be located? use debug inside called function (_modify.mixins.scss)
+        @include owf-modify_status-background-and-foreground("&#{&}--dropdown:hover > .#{$owf-widget-list_class-name}-item__layout, &#{&}--dropdown:hover > .#{$owf-widget-list_class-name}-item__action, &#{&}--dropdown:hover > .#{$owf-widget-list_class-name}-item__layout > .#{$owf-widget-list_class-name}-item__action", null, 4%);
+
+        //&:hover {
+        //    background: owf-color_get-shade($owf-color_status-primary_background, 10%); // for highlighting trace, improve
+        //    color: $owf-color_status-primary_foreground;
+        //}
+
+        &:last-child {
+            @include owf-sass_extend-placeholder(owf-utility_no-border_bottom);
+        }
+
+        @include owf-modify_status-thick-border;
+        //@include owf-modify_status-background-and-foreground(".#{$owf-widget-list_class-name}-item__layout:hover, .#{$owf-widget-list_class-name}-item__action:hover", null, 4%);
+        @include owf-modify_status-background-and-foreground("> .#{$owf-widget-list_class-name}-item__layout:hover, > .#{$owf-widget-list_class-name}-item__action:hover, > .#{$owf-widget-list_class-name}-item__layout:hover .#{$owf-widget-list_class-name}-item__action", null, 4%);
+        
+        // this is a temporary hack and should be fixed in a proper way either in 'owf-modify_status-background-and-foreground' (_modify.mixins.scss) or in 'owf-utility_status-background_' (_utility.placeholders.scss)
+        &#{&}--default {
+            > .#{$owf-widget-list_class-name} {
+                &-item {
+                    &__layout {
+                        &:hover {
+                            background: owf-color_get-shade($owf-color_status-default_background, -4%);
+                            color: $owf-color_status-default_foreground;
+
+                            .#{$owf-widget-list_class-name} {
+                                &-item {
+                                    &__action {
+                                        background: owf-color_get-shade($owf-color_status-default_background, -4%);
+                                        //color: $owf-color_status-default_foreground;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &__action {
+                        &:hover {
+                            background: owf-color_get-shade($owf-color_status-default_background, -4%);
+                            //color: $owf-color_status-default_foreground;
+                        }
+                    }
+                }
+            }
+
+            &.#{$owf-widget-list_class-name} {
+                &-item {
+                    &--active {
+                        background: $owf-color_status-default_background;
+                    }
+                }
+            }
+        }
+    }
+    
+    @each $modifier-name, $owf-widget-list-item_height in $owf-widget-list-item_height-modifiers-map {
+        $current-selector: if($modifier-name == null, null, &#{&}--#{$modifier-name});
+        
+        @include owf-utility_wrap-content-inside-selector($current-selector, true) {
+            
+            @include owf-sass_define-placeholders {
+                @include owf-sass_define-placeholder(owf-widget-list-item__status--narrow){
+                    width: $owf-widget-list-item_height - $owf-base_border-width_thick;
+                    min-width: $owf-widget-list-item_height - $owf-base_border-width_thick;
+                    max-width: $owf-widget-list-item_height - $owf-base_border-width_thick;
+                }
+                @include owf-sass_define-placeholder(owf-widget-list-item__status--compensate-for-thick-border){
+                    > :first-child {
+                        width: $owf-widget-list-item_height;
+                        margin-left: -1 * $owf-base_border-width_thick;
+                    }
+                }
+            }
+            
+            @include owf-utility_wrap-content-inside-selector(if($current-selector == null, null, "." + $owf-widget-list_class-name)) {
+                
+                &-item {
+                    line-height: $owf-widget-list-item_height;
+                    
+                    &__action {
+                        @include owf-sass_extend-placeholder(owf-reset_anchor);
+                        @include owf-sass_extend-placeholder(owf-utility_float_right);
+
+                        display: block;
+
+                        & + .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__layout {
+                                    margin-right: $owf-widget-list-item_height;
+                                }
+                            }
+                        }
+
+                        &#{&}--border-left {
+                            @include owf-sass_extend-placeholder(owf-utility_border_left);
+                        }
+
+                        &:hover {
+                            background: owf-color_get-shade($owf-color_status-primary_background, 10%);
+                            color: $owf-color_status-primary_foreground;
+                        }
+                    }
+                    &__status {
+                        @include owf-sass_extend-placeholder(owf-utility_float_left);
+
+                        width: $owf-widget-list-item_height;
+                        height: $owf-widget-list-item_height;
+                        line-height: $owf-widget-list-item_height;
+                        position: relative;
+                        text-align: center;
+                        overflow: hidden;
+                        box-sizing: content-box;
+                        border-right: $owf-base_border-width $owf-base_border-style $owf-color_background_light;
+
+                        & + .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__icon + .#{$owf-widget-list_class-name} {
+                                    &-item { 
+                                        &__text {
+                                            margin-left: $owf-widget-list-item_height * 2;
+                                        }
+                                    }
+                                }
+                                &__text {
+                                    margin-left: $owf-widget-list-item_height;
+                                }
+                            }
+                        }
+                    }
+                    &__icon {
+                        @include owf-sass_extend-placeholder(owf-utility_float_left);
+
+                        width: $owf-widget-list-item_height;
+                        height: $owf-widget-list-item_height;
+                        line-height: $owf-widget-list-item_height;
+                        padding: 0 map-get($owf-widget-list-item_padding-modifiers-map, $modifier-name);
+                        text-align: center;
+
+                        & + .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__text {
+                                    padding-left: 0;
+                                }
+                            }
+                        }
+                    }
+                    &__text {
+                        @include owf-sass_extend-placeholder(owf-utility_text-overflow-ellipsis);
+
+                        padding: 0 map-get($owf-widget-list-item_padding-modifiers-map, $modifier-name);
+                    }
+
+                    @include owf-utility-wrap-content-inside-status-modifiers {
+                        .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__status {
+                                    @include owf-sass_extend-placeholder(owf-widget-list-item__status--narrow);
+
+                                    & + .#{$owf-widget-list_class-name} {
+                                        &-item {
+                                            &__icon + .#{$owf-widget-list_class-name} {
+                                                &-item { 
+                                                    &__text { // .dbm-widget-list-item__status + .dbm-widget-list-item__icon + .dbm-widget-list-item__text
+                                                        margin-left: $owf-widget-list-item_height * 2 - $owf-base_border-width_thick;
+                                                    }
+                                                }
+                                            }
+                                            &__text { // .dbm-widget-list-item__status + .dbm-widget-list-item__text
+                                                margin-left: $owf-widget-list-item_height - $owf-base_border-width_thick;
+                                            }
+                                        }
+                                    }
+
+                                    &.#{$owf-widget-list_class-name} {
+                                        &-item {
+                                            &__status {
+                                                &--compensate-for-thick-border {
+                                                    @include owf-sass_extend-placeholder(owf-widget-list-item__status--compensate-for-thick-border);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .#{$owf-widget-list_class-name} { // added (vimartra)
+                        &-item {
+                            &__icon {
+                                & + .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &__text { // .dbm-widget-list-item__icon + .dbm-widget-list-item__text
+                                            margin-left: $owf-widget-list-item_height;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                &#{&}--horizontal {
+                    > .#{$owf-widget-list_class-name} {
+                        &__layout {
+                            > .#{$owf-widget-list_class-name} {
+                                &-item {
+                                    // .owf-widget-list.owf-widget-list--horizontal .owf-widget-list__layout > .owf-widget-list-item 
+                                    @include owf-sass_extend-placeholder(owf-utility_float_left);
+                                    @include owf-sass_extend-placeholder(owf-utility_no-border);
+                                    @include owf-sass_extend-placeholder(owf-utility_border_right);
+
+                                    &:last-child {
+                                        @include owf-sass_extend-placeholder(owf-utility_no-border_right);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.#{$owf-widget-list_class-name} {
+                        &--responsive {
+                            .#{$owf-widget-list_class-name} {
+                                &__toggle {
+                                    &-input {
+                                        @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+
+                                        width: $owf-widget-list-item_height;
+                                        height: $owf-widget-list-item_height;
+                                        display: none;
+                                        cursor: pointer;
+                                        opacity: 0.000001;
+
+                                        &:checked + .#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-label {
+                                                    background: owf-color_get-shade($owf-color_status-primary_background, light);
+                                                    color: $owf-color_status-primary_foreground;
+                                                }
+                                            }
+                                        }
+
+                                        &.#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-input {
+                                                    &--float {
+                                                        &-left {
+                                                            float: left;
+                                                            margin-right: -1 * $owf-widget-list-item_height;
+                                                        }
+                                                        &-right {
+                                                            float: right;
+                                                            margin-left: -1 * $owf-widget-list-item_height;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &-label {
+                                        @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+
+                                        width: $owf-widget-list-item_height;
+                                        height: $owf-widget-list-item_height;
+                                        line-height: $owf-widget-list-item_height;
+                                        display: none;
+                                        cursor: pointer;
+                                        text-align: center; // added. different from previous version
+
+                                        &.#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-label {
+                                                    //&--active {
+                                                    //    background: owf-color_get-shade($owf-color_status-primary_background, light);
+                                                    //    color: $owf-color_status-primary_foreground;
+                                                    //}
+                                                    &--divider {
+                                                        &-right {
+                                                            border-right: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                        &-left {
+                                                            border-left: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                    }
+                                                    &--float {
+                                                        &-left {
+                                                            float: left;
+                                                        }
+                                                        &-right {
+                                                            float: right;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            @include owf-sass_create-placeholderable-media-query(extra-small) {
+                                .#{$owf-widget-list_class-name} {
+                                    &__layout {
+                                        display: none;
+                                    }
+                                    &-item {
+                                        float: none;
+                                        clear: both;
+
+                                        &.#{$owf-widget-list_class-name} {
+                                            &-item {
+                                                &--divider {
+                                                    &-right {
+                                                        &:not(.#{$owf-widget-list_class-name}-item--float-left):not(.#{$owf-widget-list_class-name}-item--float-right){
+                                                            border-right: none;
+                                                            border-bottom: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                    }
+                                                    &-left {
+                                                        &:not(.#{$owf-widget-list_class-name}-item--float-left):not(.#{$owf-widget-list_class-name}-item--float-right){
+                                                            border-left: none;
+                                                            border-top: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                    }
+                                                }
+                                                &--float {
+                                                    &-left,
+                                                    &-right {
+                                                        clear: none;
+                                                    }
+                                                    &-left {
+                                                        float: left;
+                                                    }
+                                                    &-right {
+                                                        float: right;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &__toggle {
+                                        &-input,
+                                        &-label {
+                                            display: block;
+                                        }
+
+                                        &-input {
+                                            &:checked {
+                                                ~ .#{$owf-widget-list_class-name} {
+                                                    &__layout {
+                                                        display: block;
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        /*&-label {
+                                            @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+
+
+                                            display: block;
+                                        }*/
+                                    }
+                                }
+                            }
+                        }
+                        &--no-bordered-items {
+                            > .#{$owf-widget-list_class-name} {
+                                &__layout {
+                                    > .#{$owf-widget-list_class-name} {
+                                        &-item {
+                                            @include owf-sass_extend-placeholder(owf-utility_no-border);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &-dropdown {
+        display: none;
+        position: absolute;
+        overflow: visible;
+        background: $owf-color_background; //owf-color_get-shade($owf-color_background, dark);
+        box-shadow: $owf-base_box-shadow;
+        z-index: $owf-base_z-index + 2; // 1 point higher than dbm-widget-loading
+        min-width: 100%;
+        
+        &#{&}--child {
+            left: 100%;
+            right: initial;
+            top: 0;
+        }
+        
+        .#{$owf-widget-list_class-name} {
+            &-item {
+                background: owf-color_get-shade($owf-color_background, lightest);
+            }
+        }
+        
+        &#{&}--right { // is this the right way for setting a modifier?
+            right: 0;
+        }
+    }
+    
+    &__divider {
+        margin: $owf-base_padding_small 0;
+        border-bottom: $owf-base_border;
+        
+        & + .#{$owf-widget-list_class-name} {
+            &-item {
+                @include owf-sass_extend-placeholder(owf-utility_border_top);
+            }
+        }
+    }
+    
+    &#{&}--no-bordered-items {
+        .#{$owf-widget-list_class-name} {
+            &-item {
+                @include owf-sass_extend-placeholder(owf-utility_no-border_top);
+                @include owf-sass_extend-placeholder(owf-utility_no-border_bottom);
+            }
+        }
+    }
+    
+    &#{&}--padded {
+        padding: $owf-base_padding_small 0;
+
+        &:not(.#{$owf-widget-list_class-name}--no-bordered-items){
+            .#{$owf-widget-list_class-name} {
+                &-item {
+                    &:first-child {
+                        @include owf-sass_extend-placeholder(owf-utility_border_top);
+                    }
+                    &:last-child {
+                        @include owf-sass_extend-placeholder(owf-utility_border_bottom);
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--responsive {
+        .#{$owf-widget-list_class-name} {
+            &-item {
+                &--dropdown {
+                    > .#{$owf-widget-list_class-name} {
+                        &__toggle {
+                            &-input {
+                                @include owf-sass_create-placeholderable-media-query(extra-small) {
+                                    position: absolute;
+                                    width: 100%;
+                                    
+                                    &:checked {
+                                        ~ .#{$owf-widget-list_class-name} {
+                                            &-dropdown {
+                                                display: block;
+                                                position: initial;
+                                                padding-left: $owf-base_padding_medium;
+                                                
+                                                > .#{$owf-widget-list_class-name} {
+                                                    > .#{$owf-widget-list_class-name} {
+                                                        &__layout {
+                                                            display: block;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--stealth {
+        .#{$owf-widget-list_class-name} {
+            &-item {
+                &__layout {
+                    &:hover {
+                        background: none;
+                        color: owf-color_get-shade($owf-color_text, 6%); // #444;
+                    }
+                }
+            }
+        }
+        
+        &.#{$owf-widget-list_class-name} {
+            &--horizontal {
+                > .#{$owf-widget-list_class-name} {
+                    &__layout {
+                        .#{$owf-widget-list_class-name} {
+                            &-item {
+                                border-color: owf-color_get-shade($owf-color_border, -49%); // #6f6f6f
+                                
+                                .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &__layout {
+                                            .#{$owf-widget-list_class-name} {
+                                                &-item {
+                                                    &__text {
+                                                        padding: 0 $owf-base_padding;
+                                                    }
+                                                    &__icon {
+                                                        & + .#{$owf-widget-list_class-name} {
+                                                            &-item {
+                                                                &__text {
+                                                                    padding-left: 0;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &--non-hoverable {
+        .#{$owf-widget-list_class-name} {
+            &__layout {
+                .#{$owf-widget-list_class-name} {
+                    &-item {
+                        &__layout,
+                        &__action {
+                            &:hover {
+                                background: inherit;
+                                color: inherit;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @include owf-modify_border;
+    @include owf-modify_float;
+    @include owf-modify_clear;
+}

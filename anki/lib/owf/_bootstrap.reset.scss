@@ -1,0 +1,26 @@
+.table {
+    > thead > tr > th {
+        border-bottom: $owf-base_border-width $owf-base_border-style darken($owf-color_border, 5);
+    }
+    
+    &-responsive {
+        border: none;
+    }
+    
+    &, &-responsive {
+        margin-bottom: 0;
+    }
+}
+
+.glyphicon {
+    margin-top: 0.25em;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"] {
+    line-height: initial;
+  }
+}

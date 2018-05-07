@@ -1,0 +1,509 @@
+$owf-widget-list_name: list !default;
+$owf-widget-list_class-name: #{$owf-widget_class-name}-#{$owf-widget-list_name};
+
+$owf-widget-list-item_height-modifiers-map: (
+    null: $owf-base_row_height,
+    medium: $owf-base_row_height_medium
+);
+$owf-widget-list-item_padding-modifiers-map: (
+    null: $owf-base_padding,
+    medium: $owf-base_padding_medium
+);
+$owf-widget-list--horizontal_owf-widget-list-item__icon_width-modifiers-map: (
+    null: $owf-base_row_height_medium,
+    medium: $owf-base_row_height_small
+);
+$owf-widget-list--horizontal_owf-widget-list-item__icon_padding-right-modifiers-map: (
+    null: $owf-base_padding_medium,
+    medium: $owf-base_padding_small
+);
+
+&-#{$owf-widget-list_name} {
+    display: block;
+    background: $owf-color_background_light;
+    
+    &-layout {
+        @include owf-sass_extend-placeholder(owf-reset_list);
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+        display: block;
+    }
+    
+    @each $modifier-name, $owf-widget-list-item_height in $owf-widget-list-item_height-modifiers-map {
+        $current-selector: if($modifier-name == null, null, &#{&}--#{$modifier-name});
+        
+        @include owf-utility_wrap-content-inside-selector($current-selector, true){
+            @include owf-utility_wrap-content-inside-selector(if($current-selector == null, null, "." + $owf-widget-list_class-name)){
+                &-item {
+                    height: $owf-widget-list-item_height;
+                    line-height: $owf-widget-list-item_height;
+                    display: block;
+
+                    &-layout {
+                        @include owf-sass_extend-placeholder(owf-reset_anchor);
+
+                        height: $owf-widget-list-item_height;
+                        line-height: $owf-widget-list-item_height;
+                        display: block;
+
+                        &:hover/*, 
+                        &:focus*/ {
+                            background: $owf-color_status-primary_background;
+                            color: $owf-color_status-primary_foreground; 
+                        }
+                    }
+
+                    &__icon {
+                        width: $owf-widget-list-item_height;
+                        height: $owf-widget-list-item_height;
+                        line-height: $owf-widget-list-item_height;
+                        padding: 0 map-get($owf-widget-list-item_padding-modifiers-map, $modifier-name);
+                        display: block;
+                        float: left;
+                        
+                        @include owf-modify_float;
+                        
+                        & + .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__text {
+                                    padding-left: 0;
+                                }
+                            }
+                        }
+                    }
+                    &__text {
+                        @include owf-sass_extend-placeholder(owf-utility_text-overflow-ellipsis);
+
+                        padding: 0 map-get($owf-widget-list-item_padding-modifiers-map, $modifier-name);
+                        display: block;
+                    }
+                    &__action {
+                        @include owf-sass_extend-placeholder(owf-reset_anchor);
+
+                        display: block;
+                        float: right;
+                        border-left: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+
+                        .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &__icon {
+                                    width: $owf-widget-list-item_height - $owf-base_border-width;
+                                }
+                            }
+                        }
+
+                        &:hover/*, 
+                        &:focus*/ {
+                            background: $owf-color_status-primary_background;
+                            color: $owf-color_status-primary_foreground; 
+                        }
+
+                        & + .#{$owf-widget-list_class-name} {
+                            &-item {
+                                &-layout {
+                                    margin-right: $owf-widget-list-item_height;
+                                }
+                            }
+                        }
+                    }
+
+                    &--active {
+                        background: owf-color_get-shade($owf-color_status-primary_background, light);
+                        color: $owf-color_status-primary_foreground;
+                    }
+
+                    & + .#{$owf-widget-list_class-name} {
+                        &-item {
+                            .#{$owf-widget-list_class-name} { // Intended for Blocks and Elements only
+                                &-item {
+                                    &-layout {
+                                        &:hover/*, 
+                                        &:focus*/ {
+                                            .#{$owf-widget-list_class-name} {
+                                                &-item {
+                                                    &__text {
+                                                        border-top: none;
+                                                        line-height: inherit;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &__text, 
+                                    &__action {
+                                        border-top: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+
+                                        &:hover/*, 
+                                        &:focus*/ {
+                                            border-top: none;
+
+                                            .#{$owf-widget-list_class-name} {
+                                                &-item {
+                                                    &__icon {
+                                                        height: inherit;
+                                                        line-height: inherit;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .#{$owf-widget-list_class-name} {
+                                            &-item {
+                                                &__icon {
+                                                    height: $owf-widget-list-item_height - $owf-base_border-width;
+                                                    line-height: $owf-widget-list-item_height - $owf-base_border-width;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &__text {
+                                        line-height: $owf-widget-list-item_height - $owf-base_border-width;
+                                    }
+                                }
+                            }
+                        
+                            &.#{$owf-widget-list_class-name} { // Intended for Modifiers only
+                                &-item {
+                                    &--full-top-border {
+                                        .#{$owf-widget-list_class-name} {
+                                            &-item {
+                                                &-layout {
+                                                    &:hover/*, 
+                                                    &:focus*/ {
+                                                        > .#{$owf-widget-list_class-name} {
+                                                            &-item {
+                                                                &__icon {
+                                                                    line-height: inherit;
+                                                                    border-top: none;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    > .#{$owf-widget-list_class-name} {
+                                                        &-item {
+                                                            &__icon {
+                                                                line-height: $owf-widget-list-item_height;
+                                                                border-top: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        &.#{$owf-widget-list_class-name} {
+                                            &-item {
+                                                &--active {
+                                                    .#{$owf-widget-list_class-name} {
+                                                        &-item {
+                                                            &-layout {
+                                                                > .#{$owf-widget-list_class-name} {
+                                                                    &-item {
+                                                                        &__icon {
+                                                                            line-height: inherit;
+                                                                            border-top: none;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }                              
+                                        }
+                                    }
+                                    &--active {
+                                        .#{$owf-widget-list_class-name} {
+                                            &-item {
+                                                &__text,
+                                                &__action {
+                                                    border-top: none;
+                                                }
+                                                &__text {
+                                                    line-height: inherit;
+                                                }
+                                                &__action {
+                                                    border-left: $owf-base_border-width $owf-base_border-style $owf-color_status-primary_foreground;
+                                                    
+                                                    .#{$owf-widget-list_class-name} {
+                                                        &-item {
+                                                            &__icon {
+                                                                height: $owf-widget-list-item_height;
+                                                                line-height: $owf-widget-list-item_height;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &.#{$owf-widget-list_class-name} {
+                &--horizontal {
+                    .#{$owf-widget-list_class-name} {
+                        &-item {
+                            &-layout {
+                                > .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &__icon {
+                                            &:not(:only-child){
+                                                width: map-get($owf-widget-list--horizontal_owf-widget-list-item__icon_width-modifiers-map, $modifier-name);
+                                                padding-right: map-get($owf-widget-list--horizontal_owf-widget-list-item__icon_padding-right-modifiers-map, $modifier-name);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            &__action {
+                                border-left: none;
+                                
+                                .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &__icon {
+                                            width: map-get($owf-widget-list--horizontal_owf-widget-list-item__icon_width-modifiers-map, $modifier-name);
+                                            height: $owf-widget-list-item_height;
+                                            line-height: $owf-widget-list-item_height;
+                                            padding: 0 map-get($owf-widget-list--horizontal_owf-widget-list-item__icon_padding-right-modifiers-map, $modifier-name);
+                                        }
+                                    }
+                                }
+                                
+                                & + .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &-layout {
+                                            margin-right: map-get($owf-widget-list--horizontal_owf-widget-list-item__icon_width-modifiers-map, $modifier-name);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            &--active {
+                                .#{$owf-widget-list_class-name} {
+                                    &-item {
+                                        &__action {
+                                            border-left: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    &.#{$owf-widget-list_class-name} {
+                        &--responsive{
+                            .#{$owf-widget-list_class-name} {
+                                &__toggle {
+                                    &-input {
+                                        @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+                                        
+                                        width: $owf-widget-list-item_height;
+                                        height: $owf-widget-list-item_height;
+                                        display: none;
+                                        cursor: pointer;
+                                        opacity: 0.000001;
+                                        
+                                        &:checked + .#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-label {
+                                                    background: owf-color_get-shade($owf-color_status-primary_background, light);
+                                                    color: $owf-color_status-primary_foreground;
+                                                }
+                                            }
+                                        }
+                                        
+                                        &.#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-input {
+                                                    &--float {
+                                                        &-left {
+                                                            float: left;
+                                                            margin-right: -1 * $owf-widget-list-item_height;
+                                                        }
+                                                        &-right {
+                                                            float: right;
+                                                            margin-left: -1 * $owf-widget-list-item_height;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &-label {
+                                        @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+                                        
+                                        width: $owf-widget-list-item_height;
+                                        height: $owf-widget-list-item_height;
+                                        line-height: $owf-widget-list-item_height;
+                                        display: none;
+                                        cursor: pointer;
+                                        
+                                        &.#{$owf-widget-list_class-name} {
+                                            &__toggle {
+                                                &-label {
+                                                    &--active {
+                                                        background: owf-color_get-shade($owf-color_status-primary_background, light);
+                                                        color: $owf-color_status-primary_foreground;
+                                                    }
+                                                    &--divider {
+                                                        &-right {
+                                                            border-right: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                        &-left {
+                                                            border-left: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                                        }
+                                                    }
+                                                    &--float {
+                                                        &-left {
+                                                            float: left;
+                                                        }
+                                                        &-right {
+                                                            float: right;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        &:hover {
+                                            background: $owf-color_status-primary_background;
+                                            color: $owf-color_status-primary_foreground;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &#{&}--padded {
+        padding: $owf-base_padding_small 0;
+    }
+    
+    &#{&}--horizontal {
+        @include owf-sass_extend-placeholder(owf-utility_clearfix);
+        
+        .#{$owf-widget-list_class-name} {
+            &-item {
+                & + .#{$owf-widget-list_class-name} {
+                    &-item {
+                        .#{$owf-widget-list_class-name} { // Intended for Blocks and Elements only
+                            &-item {
+                                &__text, 
+                                &__action {
+                                    border-top: none;
+                                }
+                                &__text {
+                                    line-height: inherit;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.#{$owf-widget-list_class-name} {
+                    &-item {
+                        &--divider {
+                            &-right {
+                                border-right: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                            }
+                            &-left {
+                                border-left: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                            }
+                        }
+                    }
+                }
+
+                &:not(.#{$owf-widget-list_class-name}-item--float-right) {
+                    float: left;
+                }
+            }
+        }
+        
+        &.#{$owf-widget-list_class-name} {
+            &--responsive{
+                @include owf-sass_create-placeholderable-media-query(extra-small){
+                    .#{$owf-widget-list_class-name} {
+                        &-layout {
+                            display: none;
+                        }
+                        &-item {
+                            float: none;
+                            clear: both;
+                            
+                            &.#{$owf-widget-list_class-name} {
+                                &-item {
+                                    &--divider {
+                                        &-right {
+                                            &:not(.#{$owf-widget-list_class-name}-item--float-left):not(.#{$owf-widget-list_class-name}-item--float-right){
+                                                border-right: none;
+                                                border-bottom: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                            }
+                                        }
+                                        &-left {
+                                            &:not(.#{$owf-widget-list_class-name}-item--float-left):not(.#{$owf-widget-list_class-name}-item--float-right){
+                                                border-left: none;
+                                                border-top: $owf-base_border-width $owf-base_border-style owf-color_get-shade($owf-color_background, light);
+                                            }
+                                        }
+                                    }
+                                    &--float {
+                                        &-left,
+                                        &-right {
+                                            clear: none;
+                                        }
+                                        &-left {
+                                            float: left;
+                                        }
+                                        &-right {
+                                            float: right;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        &__toggle {
+                            &-input,
+                            &-label {
+                                display: block;
+                            }
+                            
+                            &-input {
+                                &:checked {
+                                    ~ .#{$owf-widget-list_class-name} {
+                                        &-layout {
+                                            display: block;
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                            /*&-label {
+                                @include owf-sass_extend-placeholder(owf-utility_no-margin-and-padding);
+                                
+                                
+                                display: block;
+                            }*/
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &-item {
+        @include owf-modify_float;
+    }
+    
+    @include owf-modify_float;
+}

@@ -1,0 +1,32 @@
+$owf-widget-bar_class-name: #{$owf-widget_class-name}-bar;
+$owf-widget-bar_height: 3px;
+
+&-bar {
+    height: $owf-widget-bar_height;
+    background: $owf-color_border;
+    position: relative;
+    overflow: hidden;
+    
+    &__bar {
+        width: 0%;
+        height: inherit;
+        background: $owf-color_status-primary_background;
+        
+        transition-property: width;
+        transition-duration: $owf-base_transition-duration;
+    }
+    
+    @include owf-modify_status-background(".#{$owf-widget-bar_class-name}__bar");
+    
+    
+    //@each $modifier-name, $background-color in $owf-color_status-modifiers-map_background {
+    //    &#{&}--#{$modifier-name} {
+    //        .#{$owf-widget-bar_class-name} {
+    //            &__bar {
+    //                background: $background-color;
+    //                border-right: none;
+    //            }
+    //        }
+    //    }
+    // }
+}

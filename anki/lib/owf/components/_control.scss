@@ -1,0 +1,12 @@
+$owf-control_name: control !default;
+$owf-control_class-name: #{$owf-base_namespace}-#{$owf-control_name};
+
+&-#{$owf-control_name} {
+    @import 'controls/_button.scss';
+    @import 'controls/_checkbox.scss';
+    @import 'controls/_datetime.scss';
+    @import 'controls/_radio.scss';
+    @import 'controls/_select.scss';
+    @import 'controls/_switch.scss';
+    @import 'controls/_text.scss';
+}

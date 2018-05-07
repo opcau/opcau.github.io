@@ -1,0 +1,12 @@
+@function owf-sass_get-current-media-query-placeholder-name($name){
+    $result: $name;
+    
+    @if $owf-sass_current-placeholderable-media-query != null {
+        $result: $result + "_media-query_" + $owf-sass_current-placeholderable-media-query;
+    }
+    
+    @return $result;
+}
+@function owf-sass_list-contains-value($list, $value){
+    @return index($list, $value) != null;
+}
