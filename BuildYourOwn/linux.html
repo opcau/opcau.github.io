@@ -1,0 +1,638 @@
+<!DOCTYPE HTML>
+<!--
+	Build Your Own Series - Streacy
+-->
+<html>
+	<head>
+		<title>Build Your Own Oracle Cloud Series</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Build Your Own Series Getting Started</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="Generic.html">Getting Started</a></li>
+							<li><a href="linux.html">Oracle Linux</a></li>
+							<li><a href="casb.html">CASB</a></li>
+							<li><a href="windows.html">Windows Server</a></li>
+							<li><a href="Ravello.html">Ravello</a></li>
+							<li><a href="blockchain.html">Blockchain</a></li>
+							<li><a href="https://redthunder.blog/2018/02/20/teaching-how-to-use-terraform-to-manage-oracle-cloud-infrastructure-as-code/">Terraform</a></li>
+							<li><a href="chatbot.html">Chatbot</a></li>
+							<li><a href="https://oracle.github.io/learning-library/workshops/journey2-new-data-lake/">Bigdata</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Create your first Linux machine using the $300 credits</h1>
+							<span class="image main"><img src="images/Oracle-Linux-7.jpg" width="620" height="450" alt="" /></span>
+							<p>The below instructions will take you throug a step by step guide in creating your first linux instance</p>
+
+
+					<h4 style="padding-left: 60px;">Purpose</h4>
+					<p style="padding-left: 60px;">This tutorial shows you how to create an Oracle Linux instance in Compute Classic. In this tutorial, you'll create an instance from an Oracle-provided Oracle Linux image and boot the instance from a persistent disk. You'll add an interface to an IP network that you create. You'll also add the instance to the shared network and accept the default settings to enable SSH access to the instance using an SSH key that you provide. After creating the instance, you can also set up a security rule to enable HTTP access to the instance on port 80.</p>
+					<p style="padding-left: 60px;"><strong>Note:</strong>&nbsp;Although you'll add one interface to an IP network, this tutorial doesn't cover the steps required to configure access to that interface using security rules and access control lists in IP networks. In this tutorial, you'll access the public IP address of your instance on the shared network.</p>
+					<h4 style="padding-left: 60px;">Time to Complete</h4>
+					<p style="padding-left: 60px;">15 minutes</p>
+					<h4 style="padding-left: 60px;">Background</h4>
+					<p style="padding-left: 60px;">You can use Compute Classic to rapidly provision virtual machines with storage and networking resources to meet your requirements.</p>
+					<h4 style="padding-left: 60px;">What Do You Need?</h4>
+					<p style="padding-left: 60px;">To perform the steps in this tutorial, you must have a subscription to Compute Classic. You must be a user with the&nbsp;<code>Compute_Operations</code>&nbsp;role. See&nbsp;<a href="http://www.oracle.com/pls/topic/lookup?ctx=stcomputecs&amp;id=GUID-51C7D6D3-6366-407D-86EE-097BA6BA2A39">How to Begin with Compute Classic Subscriptions</a>&nbsp;in&nbsp;<em>Using Oracle Cloud Infrastructure Compute Classic</em>.</p>
+					<p style="padding-left: 60px;">One of the following tools for generating SSH key pairs:</p>
+					<p style="padding-left: 90px;">- On Windows: PuTTY (<a href="http://www.putty.org/">http://www.putty.org</a>)</p>
+					<p style="padding-left: 90px;">- On UNIX or UNIX-like machines: The&nbsp;<code>ssh-keygen</code>&nbsp;utility. Many UNIX and UNIX-like installations already include&nbsp;<code>ssh-keygen</code>. To see it's installed on your machine, run the&nbsp;<code>ssh-keygen</code>&nbsp;command. If it isn't available, then obtain OpenSSH from&nbsp;<a href="http://www.openssh.com/portable.html">http://www.openssh.com/portable.html</a>.</p>
+					<p style="padding-left: 90px;">&nbsp;</p>
+					<h4 style="padding-left: 60px;">Process</h4>
+					<p style="padding-left: 60px;">To create an Oracle Linux instance in Compute Classic and set up HTTP access to the instance, you must complete the following tasks</p>
+					<p style="padding-left: 60px;">1.&nbsp; Generate an SSH key pair on your local system</p>
+					<p style="padding-left: 60px;">2.&nbsp; Launch the Create Instance wizard from the web console to create your instance.</p>
+					<p style="padding-left: 60px;">You can complete the following tasks before you launch the Create Instance wizard, or you can complete each of these tasks directly from within the Create Instance wizard while creating your instance:</p>
+					<p style="padding-left: 90px;">- Add your SSH public key to your Compute Classic account.</p>
+					<p style="padding-left: 90px;">- Create an IP network.</p>
+					<p style="padding-left: 90px;">- Create an IP reservation to assign a permanent public IP address to the interface on the shared network.</p>
+					<p style="padding-left: 90px;">- Create security lists to control traffic to and from your instance on the shared network.</p>
+					<p style="padding-left: 90px;">- Create storage volumes to attach to your instance.</p>
+					<p style="padding-left: 60px;">This tutorial assumes that you haven't completed these tasks before launching the Create Instance wizard. You'll perform the required tasks from within the Create Instance wizard.</p>
+					<p style="padding-left: 60px;">After creating your instance, you'll do the following:</p>
+					<p style="padding-left: 90px;">- Log in to your instance using your SSH private key.</p>
+					<p style="padding-left: 90px;">- Mount a storage volume on your instance.</p>
+					<p style="padding-left: 90px;">- (Optional) Configure the instance for HTTP access.</p>
+					<p style="padding-left: 90px;">&nbsp;</p>
+					<h4 style="padding-left: 60px;">&nbsp;</h4>
+					<h4 style="padding-left: 60px;">Generating a SSH Key Pair</h4>
+					<section>
+					<p style="padding-left: 60px;">When you create an Oracle Linux instance in Compute Classic, you must provide an SSH public key that will be used for authentication when you log in to the instance. Generate your SSH key pair before you start to create your instance.</p>
+					<p style="padding-left: 60px;"><strong>Note:</strong>&nbsp;Use your keys generated on UNIX-like systems to log in from UNIX-like local hosts, and use your keys generated on Windows to log in from a Windows local host. Attempting to do otherwise may result in an inability to log in. For example, you can't connect to an instance from a Linux command line using a key generated by PuTTY Generator in Windows - the connection attempt fails.</p>
+					<section><a id="section2s1"></a>&nbsp;
+					<h3 class="d_arrow" style="padding-left: 60px;">Generating an SSH Key Pair on UNIX or UNIX-Like Systems Using ssh-keygen</h3>
+					<div>
+					<ol>
+					<ol>
+					<li>
+					<p>Run the&nbsp;<code>ssh-keygen</code>&nbsp;command.</p>
+					<pre><code>ssh-keygen -b 2048 -t rsa</code></pre>
+					</li>
+					<li>
+					<p>The command prompts you to enter the path to the file in which you want to save the key. A default path and file name are suggested in parentheses. For example:&nbsp;<code>/home/user_name/.ssh/id_rsa.</code></p>
+					<p>To accept the default path and file name, press&nbsp;<strong>Enter.</strong></p>
+					<p>Otherwise, enter the desired path and file name, and then press&nbsp;<strong>Enter.</strong></p>
+					</li>
+					<li>
+					<p>The command prompts you for a passphrase. Enter a passphrase.</p>
+					<p>Note that the passphrase isn't displayed when you type it in. Remember the passphrase. If you forget the passphrase, you can't recover it.</p>
+					</li>
+					<li>
+					<p>When prompted, enter the passphrase again to confirm it.</p>
+					</li>
+					</ol>
+					</ol>
+					<p style="padding-left: 60px;">The command generates an SSH key pair consisting of a public key and a private key, and saves them in the specified path. The file name of the public key is created automatically by appending&nbsp;<code>.pub</code>&nbsp;to the name of the private key file. For example, if the file name of the SSH private key is&nbsp;<code>id_rsa</code>, then the file name of the public key would be&nbsp;<code>id_rsa.pub.</code></p>
+					<p style="padding-left: 60px;">N.B Make a note of the path where you've saved the SSH key pair. When you create instances, you must provide the SSH public key. When you log in to an instance, you must specify the corresponding private key and enter the passphrase when prompted.</p>
+					</div>
+					</section>
+					<section><a id="section2s2"></a>&nbsp;
+					<h3 class="d_arrow" style="padding-left: 60px;">Generating an SSH Key Pair On Windows Using the PuTTY Key Generator</h3>
+					<div>
+					<ol>
+					<li>
+					<p>Find&nbsp;<code>puttygen.exe</code>&nbsp;in the PuTTY folder on your computer, and double-click it.</p>
+					</li>
+					<li>
+					<p>Use the default key type,&nbsp;<strong>RSA</strong>&nbsp;(Note: this is named&nbsp;<strong>SSH-2 RSA</strong>&nbsp;in some versions of PuTTY Key Generator), with the&nbsp;<strong>Number of bits in a generated key</strong>&nbsp;set to&nbsp;<strong>2048</strong>. Then click&nbsp;<strong>Generate.</strong></p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Generate SSH key pair on Windows" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/generate-ssh-key-puttygen2.png" alt="Generate SSH key pair on Windows" /></span></p>
+					</li>
+					<li>
+					<p>Move your mouse around the blank area to generate randomness. PuTTY Key Generator generates the key pair.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Generate SSH key pair on Windows" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/generate-randomness-puttygen2.png" alt="Generate SSH key pair on Windows" /></span></p>
+					</li>
+					<li>
+					<p>Save your private key.</p>
+					<ol type="a">
+					<li>
+					<p>The key comment is the name of the key. You can keep the generated key comment or create your own.</p>
+					</li>
+					<li>
+					<p>Enter a passphrase in the&nbsp;<strong>Key passphrase</strong>&nbsp;and the&nbsp;<strong>Confirm passphrase</strong>&nbsp;fields.</p>
+					<p><strong>Note:&nbsp;</strong>Remember the passphrase. You can't recover a passphrase if you forget it.</p>
+					</li>
+					<li>
+					<p>To save the private key in the PuTTY PPK format, click&nbsp;<strong>Save private key.</strong></p>
+					<p>Enter the same name as you used for the key comment, so that you know which public key to use this private key with. The private key is saved in PuTTY's Private Key (PPK) format, which is a proprietary format that works only with the PuTTY toolset. You can use this key whenever you use PuTTY for SSH.</p>
+					</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Generate SSH key pair on Windows" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/saveprivatekey2.png" alt="Generate SSH key pair on Windows" /></span></p>
+					</li>
+					<li>
+					<p>Next, save your SSH public key.</p>
+					<ol type="a">
+					<li>
+					<p>In the PuTTY Key Generator, click anywhere in the&nbsp;<strong>Public key for pasting into OpenSSH authorized_keys file:</strong>&nbsp;field, right-click and choose&nbsp;<strong>Select All</strong>&nbsp;from the menu.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Select all characters of public key in Windows" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/selectall2.png" alt="Select all characters of public key in Windows" /></span></p>
+					<p><strong>Note:&nbsp;</strong>If you select the characters manually, make sure that you select&nbsp;<em>all</em>&nbsp;the characters in the public key, not just the ones you can see in the narrow window. If there is a scroll bar next to the characters, you aren't seeing all the characters.</p>
+					</li>
+					<li>
+					<p>Right-click somewhere in the selected text and select&nbsp;<strong>Copy</strong>&nbsp;from the menu.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Copy public key on Windows" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/copypublickey2.png" alt="Copy public key on Windows" /></span></p>
+					</li>
+					<li>
+					<p>Open a text editor and paste the characters. Ensure that you paste the text at the first character in the text editor, and don't insert any line breaks.</p>
+					</li>
+					<li>
+					<p>Save the key using the same root file name that you used for the private key. You can use any extension that you want, but using the&nbsp;<code>.pub</code>&nbsp;extension is a useful convention to indicate that this file contains a public key.</p>
+					</li>
+					<li>
+					<p>Exit PuTTY Key Generator.</p>
+					</li>
+					</ol>
+					</li>
+					<li>
+					<p>Make a note of the names of the public and private key files and where they are saved. When you create Oracle Linux instances, you must specify a SSH public key to use for authentication. When you log in to an Oracle Linux instance, you must provide the path to the corresponding SSH private key and enter the passphrase when prompted.</p>
+					</li>
+					</ol>
+					</div>
+					</section>
+					<p style="padding-left: 90px;">&nbsp;</p>
+					<h4 style="padding-left: 60px;">&nbsp;</h4>
+					<h4 style="padding-left: 60px;">Create an instance with the create instance wizard</h4>
+					<section>
+					<section>
+					<div>
+					<ol>
+					<li style="list-style-type: none;">
+					<ol>
+					<li>
+					<p>Sign in to the Oracle Cloud My Services application at&nbsp;<a href="https://cloud.oracle.com/sign_in" target="_blank" rel="noopener">https://cloud.oracle.com/sign_in</a>. The My Services Dashboard page is displayed.</p>
+					</li>
+					<li>
+					<p>Click the&nbsp;<img title="Quick Navigation icon" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/quick-nav-icon.png" alt="Quick Navigation icon" width="15" height="14" />&nbsp;menu at the upper left corner of the page and select&nbsp;<strong>Compute Classic</strong>.</p>
+					<p>The Compute Classic console is displayed.</p>
+					</li>
+					<li>
+					<p>On the Instances page, click&nbsp;<strong>Create Instance</strong>.</p>
+					<p>The Create Instance wizard starts.</p>
+					</li>
+					<li>
+					<p>On some sites, the Create Instance wizard displays a set of QuickStart instances. This tutorial focuses on creating a custom instance, which you can do from the&nbsp;<strong>QuickStarts</strong>&nbsp;page by clicking the&nbsp;<strong>Customize</strong>&nbsp;button and completing the steps that follow.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create instance - QuickStarts page" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create_quickstart_instance.png" alt="Create instance - QuickStarts page" /></span></p>
+					</li>
+					<li>
+					<p>On the Image page, select the image that you want to use. For the purpose of this tutorial, select&nbsp;<strong>OL_6.4_UEKR4_x86_64.</strong>&nbsp;Click the button to go to the next page.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Image page" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-instance-wizard-image.jpg" alt="Create an instance - Image page" /></span></p>
+					</li>
+					<li>
+					<p>On the Shape page, select an appropriate shape for your instance. The shape determines the number of CPUs and RAM that your instance will have. For the purpose of this tutorial, select&nbsp;<strong>oc3</strong>&nbsp;(OCPUs: 1, Memory: 7.5 GB). Click the button to go to the next page.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Shape page" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/select_instance_shape2.png" alt="Create an instance - Shape page" /></span></p>
+					</li>
+					<li>On the Instance page, select or enter the following, and then click the button to go to the next page.
+					<ol type="a">
+					<li><strong>High Availability Policy:</strong>&nbsp;Retain the default setting,&nbsp;<strong>Active</strong>.</li>
+					<li><strong>Name:</strong>&nbsp;Enter an appropriate name, or retain the default.</li>
+					<li><strong>Label:</strong>&nbsp;Enter a label to help identify the instance, or retain the default. The label is used to list the instance on the Instances page.</li>
+					<li><strong>Description:</strong>&nbsp;Enter a description, if required.</li>
+					<li><strong>Tags:</strong>&nbsp;Specify a tag to help identify your instance, if required.</li>
+					<li><strong>SSH Keys:&nbsp;</strong>Click this field or start typing to see a list of available SSH public keys. To add a new SSH public key:
+					<ol type="i">
+					<li>Click&nbsp;<strong>Add SSH Public Key</strong>.</li>
+					<li>Enter a name for the SSH public key.</li>
+					<li>Click&nbsp;<strong>Select File</strong>&nbsp;and navigate to the folder where your SSH public key is saved, or paste the public key in the&nbsp;<strong>Value</strong>&nbsp;field.</li>
+					<li>Click&nbsp;<strong>Add</strong>.</li>
+					</ol>
+					The SSH public key is added and appears in the list of SSH keys that you want to associate with the instance.</li>
+					<li>
+					<p><strong>Custom Attributes</strong>: This field allows you to customize your instance by providing additional information specific to each instance. For example, you might have specified certain scripts in the custom machine image that you use to boot your instance. Such scripts could require instance-specific user data. You can enter that instance-specific user data in this field, in JSON format. The information that you enter here is stored as user data on your instance. After the instance is created, the attributes that you specify here are available within the instance at http://192.0.0.192/latest/userdata.</p>
+					<p>For the purpose of this tutorial, leave this field blank.</p>
+					</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Instance page" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-instance-wizard-instance.jpg" alt="Create an instance - Instance page" /></span></p>
+					<p>8.  On the Network page, to accept the default settings for the shared network and add an interface to an IP network, enter or select the following. When you're done, click the button to go to the next page.</p>
+					<ol type="a">
+					<li><strong>DNS Hostname Prefix</strong>: Enter a string that will be used as a prefix in the domain host name for your instance. For the purpose of this tutorial, you can leave this blank.</li>
+					<li><strong>Network Options</strong>: Select whether you want to configure an interface on the shared network or one or more interfaces on IP networks. Select both options.</li>
+					<li><strong>IP Network Options</strong>
+					<p>Click&nbsp;<strong>Configure Interface</strong>. In the Configure IP Network Interface dialog box, select or enter the following and then click&nbsp;<strong>Save</strong>:</p>
+					<ul>
+					<li><strong>Interface</strong>: Select the interface that you want to add to the specified IP network. You can select any interface from eth0 to eth7. After you select all the interfaces that you want to add to IP networks, the first available interface is assigned to the shared network. You can't add, delete, or modify interface allocations after an instance is created.
+					<p>For this tutorial, select&nbsp;<strong>eth1</strong>.</p>
+					</li>
+					<li><strong>vNIC Name</strong>: Retain the default vNIC name or enter another name. The name you enter can contain a maximum of four characters. The three-part vNIC name is generated using this name. It has the format /Compute-identity_domain/username/instanceName_vnicName. For this tutorial, retain the default vNIC name.</li>
+					<li><strong>IP Network</strong>: Specify the IP network that you want to add this interface to. When you add an instance to an IP network, the specified interface of the instance is assigned an IP address on the specified IP network. After the instance is created, you can view information about each interface on the Instance Details page.
+					<p>If you haven't created the IP network that you want to add your instance to, you can do so now.</p>
+					<ol type="i">
+					<li>Click&nbsp;<strong>Create IP Network</strong>.</li>
+					<li>Enter a name for the IP network. For this tutorial, enter&nbsp;<strong>IPnet1</strong>.</li>
+					<li>Enter the required IP address prefix for the IP network, in CIDR format. For example, enter&nbsp;<strong>192.168.0.1/24</strong>.</li>
+					<li>You can select an IP exchange to add this IP network to. For this tutorial, leave this field blank.</li>
+					<li>Enter a description and tags for the IP network, if required, and then click&nbsp;<strong>Create</strong>. The IP network is created and selected in the&nbsp;<strong>IP Network</strong>&nbsp;field.</li>
+					</ol>
+					</li>
+					<li><strong>Static IP Address</strong>: You can specify a private IP address for this interface. The private IP address must be unused and it must belong to the subnet of the selected IP network. Remember, too, that certain IP addresses in a subnet are reserved. For example, the first unicast IP address of any IP network is reserved for the default gateway, the DHCP server, and the DNS server of that IP network.
+					<p>If no static IP address is specified, an IP address from the specified IP network is allocated dynamically, when the instance is created. Dynamically allocated IP addresses might change if the instance is shut down and restarted, or deleted and re-created.</p>
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li>
+					<p><strong>Public IP Address</strong>: You can select an available public IP address for this interface. When the instance is created, you can configure security rules and access control lists for your IP network to enable access to this IP address over the public Internet. If you don't select an IP reservation now, you can associate a public IP address with this interface later by creating or updating an IP reservation.</p>
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li>
+					<p><strong>Cloud IP Address</strong>: You can select an available cloud IP reservation for this interface. When the instance is created, this IP address can be accessed by other Oracle Cloud services without being accessible over the public Internet. If you don't select a cloud IP address now, you can associate a cloud IP address with this interface later by creating or updating an IP reservation.</p>
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li><strong>MAC Address</strong>: You can specify the MAC address of the interface, in hexadecimal format. Ensure that the MAC addresses that you specify are unique within each IP network exchange and each IP network. If you specify a duplicate MAC address, each vNIC with that MAC address is disabled.
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li><strong>Virtual NIC Sets</strong>: You can select the Virtual NIC (vNIC) sets to which to add this interface. By default, each interface is added to the default vNIC set. If you select other vNIC sets to add this interface to, you can remove it from the default vNIC set. However, ensure that you add each interface to at least one vNIC set to enable communication to that interface. After the instance is created, communication with each vNIC depends on the vNIC sets it belongs to and the access control lists that apply to each vNIC set. You can also add or remove vNICs from a vNIC set after the instance is created.
+					<p>For this tutorial, don't specify any additional vNIC sets. Retain the default vNIC set.</p>
+					</li>
+					<li><strong>DNS</strong>: You can specify DNS A record names for the instance. You can specify up to eight DNS A record names for each interface on an IP network. These names can be queried by instances on any IP network in the same IP network exchange. If no static IP address is specified for the interface, an IP address on the specified IP network is assigned automatically. After the instance is launched, the defined names are associated with the IP address that was automatically allocated to the interface.
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li><strong>Name Servers</strong>: You can enter the name servers that are sent through DHCP as option 6. You can specify a maximum of eight name server IP addresses per interface.
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li><strong>Search Domains</strong>: You can enter the search domains that should be sent through DHCP as option 119. You can enter a maximum of eight search domain zones per interface.
+					<p>For this tutorial, leave this field blank.</p>
+					</li>
+					<li><strong>Default Gateway</strong>: You can select this option if you want to use this interface as the default gateway. However, this option is used only when your instance isn't added to the shared network. When your instance is added to the shared network as well as one or more IP networks, the shared network interface acts as the default gateway. All network traffic uses the specified default gateway, unless a different interface is explicitly configured for an application within the instance.
+					<p>For this tutorial, don't select this option.</p>
+					</li>
+					</ul>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Network page - Attach IP network" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-instance-attach-ipnetwork.jpg" alt="Create an instance - Network page - Attach IP network" /></span></p>
+					<strong>d. Shared Network Options</strong>
+					<ul>
+					<li>
+					<p><strong>Public IP Address:</strong>&nbsp;To associate a permanent public IP address with the instance, select&nbsp;<strong>Persistent Public IP Reservation</strong>. If you select an autogenerated public IP address, the IP address persists while the instance is running, but will change if you delete the instance and create it again later.</p>
+					<p>If you've already created an IP address reservation, select it from the list. Otherwise, create one now.</p>
+					<ol type="i">
+					<li>Click&nbsp;<strong>Create IP Reservation</strong>.</li>
+					<li>In the Create Public IP Reservation dialog box, enter a name for the IP reservation and then click&nbsp;<strong>Create</strong>.</li>
+					</ol>
+					The IP reservation is created and selected.</li>
+					<li><strong>Security Lists:</strong>&nbsp;You can add your instance to one or more security lists. When you add an instance to a security list, you can control access to or from that instance by creating security rules that use the specified security list as a source or destination. For this tutorial, leave this field set to the "default" security list.</li>
+					</ul>
+					</li>
+					</ol>
+					</li>
+					</ol>
+					<div>&nbsp;</div>
+					</section>
+					</section>
+					<p>9. On the Storage page, to use a persistent boot disk, accept the default settings and click the button to go to the next page.</p>
+					<p>If you want to attach storage volumes to your instance, then do the following:</p>
+					<ul>
+					<li>
+					<p>If you've already created a bootable storage volume or storage volumes for applications and data, then click&nbsp;<strong>Attach Existing Volume</strong>. In the Attach Existing Storage Volume dialgo box, select or enter the following and then click&nbsp;<strong>Add</strong>.</p>
+					<ol type="i">
+					<li><strong>Attach Storage Volume:&nbsp;</strong>Select the storage volume that you want to attach.</li>
+					<li><strong>Attach as Disk #:</strong>&nbsp;Enter a disk index number. The disk number that you specify here determines the device name. The disk attached at index 1 is named /dev/xvdb, the disk at index 2 is /dev/xvdc, the disk at index 3 is /dev/xvdd, and so on.</li>
+					<li><strong>Boot Drive:</strong>&nbsp;Select this option to use the specified storage volume as the boot disk. The storage volume that you select here must have the same image as the image that you selected on the Image page. When you select this option, the disk number is automatically set to&nbsp;<strong>1</strong>.</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Storage page - Attach an existing storage volume" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-instance-wizard-attach-existing-volume.jpg" alt="Create an instance - Storage page - Attach an existing storage volume" /></span></p>
+					</li>
+					<li>To create and attach storage volumes, click&nbsp;<strong>Add New Volume</strong>. In the Add New Storage Volume dialog box, select or enter the following and then click&nbsp;<strong>Add</strong>.
+					<ol type="i">
+					<li><strong>Name:</strong>&nbsp;Enter a name for the storage volume.</li>
+					<li><strong>Size:</strong>&nbsp;The size is set automatically to accommodate the disk size that's specified in the image that you selected earlier. If you want a larger boot disk than that specified in the image, then enter a larger size. If you don't want to use this volume as a boot disk, then you can specify a size smaller than the image size.</li>
+					<li><strong>Storage Property:</strong>&nbsp;Select a storage property. For storage volumes that require low latency and high IOPS, such as for storing database files, select&nbsp;<strong>storage/latency</strong>. For all other storage volumes, select&nbsp;<strong>storage/default</strong>.</li>
+					<li><strong>Description:</strong>&nbsp;(Optional) Enter a description.</li>
+					<li><strong>Attach as Disk #:</strong>&nbsp;Accept the default disk number or enter a higher number. The disk number that you specify here determines the device name. The disk attached at index 1 is named /dev/xvdb, the disk at index 2 is /dev/xvdc, the disk at index 3 is /dev/xvdd, and so on.</li>
+					<li><strong>Boot Drive:</strong>&nbsp;Select this option to use the specified storage volume as the boot disk. When you select this option, the disk number is automatically set to 1.</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create an instance - Storage page - add new storage volume" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-instance-wizard-add-new-volume.jpg" alt="Create an instance - Storage page - add new storage volume" /></span></p>
+					10. On the Review page, verify the information that you've entered and then click&nbsp;<strong>Create.</strong>
+					<p>11. Compute Classic instances are provisioned and managed using orchestrations. The following orchestrations are created by the Create Instance wizard:</p>
+					<ul>
+					<li><strong>&lt;name&gt;_master:</strong>&nbsp;This is the master orchestration that controls individual orchestrations for the instance and for the storage volumes to be created, if any.</li>
+					<li><strong>&lt;name&gt;_instance:</strong>&nbsp;This orchestration creates the instance. If storage volumes are created during instance creation, this orchestration waits for the storage volumes to be online before starting.</li>
+					<li><strong>&lt;name&gt;_storage:</strong>&nbsp;This orchestration creates the specified storage volumes, if any.</li>
+					</ul>
+					<p>where&nbsp;<strong>&lt;name&gt;</strong>&nbsp;is the name of the instance specified in the Create Instance wizard.</p>
+					<p>To view the status of your storage volumes and instances, check the status of the corresponding orchestration:</p>
+					<ol type="i">
+					<li>Click the&nbsp;<strong>Orchestrations</strong>&nbsp;tab.
+					<p>The Orchestrations page shows a list of orchestrations along with the status of each orchestration. On some sites, you might see a single v2 orchestration listed for your instance, rather than a set of v1 orchestrations. While resources are being provisioned, the orchestration shows the status&nbsp;<strong>Starting</strong>. When all resources in an orchestration have been provisioned successfully, the orchestration shows the status&nbsp;<strong>Ready</strong>. In case of issues in provisioning resources, the orchestration shows the status&nbsp;<strong>Error</strong>.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Orchestrations page" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/orchestration.jpg" alt="Orchestrations page" /></span></p>
+					</li>
+					<li>You can also view details of an orchestration for more information. Go to the appropriate orchestration, and from the&nbsp;<img title="Menu icon" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/menu_icon.gif" alt="Menu icon" width="14" height="15" />&nbsp;menu, select&nbsp;<strong>View.</strong></li>
+					</ol>
+					<p><strong>Creating a security rule for SSH Access</strong></p>
+					<p>When your instance is created, it is automatically added to the default security list. To enable SSH access to all instances in the default security list, you must create a security rule.</p>
+					<p>To create a security rule:</p>
+					<ol>
+					<li>
+					<p>On the Compute Classic console, click the&nbsp;<strong>Network</strong>&nbsp;tab, and then click&nbsp;<strong>Security Rules</strong>&nbsp;under the&nbsp;<strong>Shared Network</strong>&nbsp;section of the left pane.</p>
+					</li>
+					<li>
+					<p>Click&nbsp;<strong>Create Security Rule.</strong></p>
+					</li>
+					<li>
+					<p>In the Create Security Rule dialog box, select or enter the following information, and then click&nbsp;<strong>Create.</strong></p>
+					<ol type="a">
+					<li>
+					<p><strong>Name</strong>: Enter an appropriate name. For the purpose of this tutorial, enter&nbsp;<strong>Allow-ssh-access.</strong></p>
+					</li>
+					<li>
+					<p><strong>Status</strong>: Retain the default,&nbsp;<strong>Enabled.</strong></p>
+					</li>
+					<li>
+					<p><strong>Security Application</strong>: Select&nbsp;<strong>ssh.</strong></p>
+					</li>
+					<li>
+					<p><strong>Source</strong>: Select&nbsp;<strong>Security IP List</strong>&nbsp;and then choose&nbsp;<strong>public-internet</strong>&nbsp;from the available security lists.</p>
+					</li>
+					<li>
+					<p><strong>Destination</strong>: Select&nbsp;<strong>Security List</strong>&nbsp;and then choose&nbsp;<strong>default</strong>&nbsp;from the available security lists.</p>
+					</li>
+					<li>
+					<p><strong>Description</strong>: Enter a description.</p>
+					</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create a security rule" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-security-rule-ssh.jpg" alt="Create a security rule" /></span></p>
+					</li>
+					</ol>
+					<p><strong>Logging into your instance using SSH</strong></p>
+					<p><strong>Note:</strong>&nbsp;Although you've added an interface on your instance to an IP network, this tutorial doesn't cover the steps required to configure access to that interface using security rules and access control lists in IP networks. In this tutorial, you'll access the public IP address of your instance on the shared network.</p>
+					<section><a id="section5s1"></a>&nbsp;
+					<h3 class="d_arrow">Logging In from a UNIX or UNIX-Like Host</h3>
+					<div>
+					<ol>
+					<li>
+					<p>Enter the following command:</p>
+					<pre><code>ssh -i <var>/path/to/private_key</var> opc@<var>public_ip_address_of_the_instance</var></code></pre>
+					<p><strong>Note:&nbsp;</strong>If you don't know the public IP address of your instance, you can find it on the Instances page of the Compute Classic console.</p>
+					</li>
+					<li>
+					<p>When prompted, enter the passphrase you provided for your SSH key pair.</p>
+					</li>
+					</ol>
+					</div>
+					</section>
+					<section><a id="section5s2"></a>&nbsp;
+					<h3 class="d_arrow">Logging In from a Windows System</h3>
+					<div>
+					<ol>
+					<li>
+					<p>Start PuTTY.</p>
+					<p>The PuTTY Configuration window is displayed, showing the Session panel.</p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Host Name (or IP address)</strong>&nbsp;field, enter the public IP address of your instance.</p>
+					<p><strong>Note:&nbsp;</strong>If you don't know the public IP address of your instance, you can find it on the Instances page of the Compute Classic console.</p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Connection type:</strong>&nbsp;field, select&nbsp;<strong>SSH</strong>&nbsp;if it's not already selected.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Log in to your instance using PuTTY" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/putty-1a.jpg" alt="Log in to your instance using PuTTY" /></span></p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Category</strong>&nbsp;pane, expand&nbsp;<strong>Connection,</strong>&nbsp;and then click&nbsp;<strong>Data.</strong></p>
+					<p>The Data panel is displayed.</p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Auto-login username</strong>&nbsp;field, enter&nbsp;<strong>opc.</strong></p>
+					<p>Confirm that the&nbsp;<strong>When username is not specified:</strong>&nbsp;option is set to&nbsp;<strong>Prompt.</strong></p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Log in to your instance using PuTTY" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/putty-2a.jpg" alt="Log in to your instance using PuTTY" width="456" height="438" /></span></p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Category</strong>&nbsp;pane, expand&nbsp;<strong>SSH,</strong>&nbsp;and then click&nbsp;<strong>Auth.</strong></p>
+					<p>The Auth panel is displayed.</p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Private key file for authentication:</strong>&nbsp;field, click&nbsp;<strong>Browse</strong>&nbsp;and select the private key file that you saved earlier.</p>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Log in to your instance using PuTTY" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/putty-3a.jpg" alt="Log in to your instance using PuTTY" width="400" height="386" /></span></p>
+					</li>
+					<li>
+					<p>In the Category tree, click&nbsp;<strong>Session</strong>.</p>
+					<p>The Session panel is displayed.</p>
+					</li>
+					<li>
+					<p>In the&nbsp;<strong>Saved Sessions</strong>&nbsp;field, enter a name for this connection configuration, and then click&nbsp;<strong>Save.</strong></p>
+					</li>
+					<li>
+					<p>Click&nbsp;<strong>Open&nbsp;</strong>to open the connection.</p>
+					<p>The PuTTY Configuration window is closed and the PuTTY window is displayed.</p>
+					</li>
+					<li>
+					<p>Enter the passphrase you had provided for your SSH key pair.</p>
+					</li>
+					<li>
+					<p>The first time you connect to your instance, the PuTTY Security Alert window is displayed, prompting you to confirm the public key. Click&nbsp;<strong>Yes</strong>&nbsp;to continue.</p>
+					</li>
+					</ol>
+					</div>
+					</section>
+					<p><strong>Mounting a storage volume on your instance</strong></p>
+					<p>After creating an instance, any data volumes that were attached to the instance must be mounted on the instance. To mount a storage volume, after logging in to the instance using SSH, do the following:</p>
+					<ol>
+					<li>
+					<p>List the devices available on the instance:</p>
+					<pre>ls /dev/xvd*</pre>
+					<p>Device names start from&nbsp;<code>/dev/xvdb</code>&nbsp;and are determined by the index number that you assigned while attaching a storage volume. For example, if you attached a storage volume at index 1, the volume gets the device name,&nbsp;<code>/dev/xvdb</code>. The storage volume at index 2 would be&nbsp;<code>/dev/xvdc</code>, the storage volume at index 3 would be&nbsp;<code>/dev/xvdd</code>, and so on.</p>
+					</li>
+					<li>
+					<p>Determine the device name corresponding to the disk index number that you want to mount.</p>
+					<p>For example, if you want to mount the storage volume that you had attached at index 2, the device name would be&nbsp;<code>/dev/xvdc</code>.</p>
+					</li>
+					<li>
+					<p>Use a tool such as&nbsp;<code>mkfs</code>&nbsp;to create a file system on the storage volume.</p>
+					<p>For example, to create an&nbsp;<code>ext3</code>&nbsp;file system on&nbsp;<code>/dev/xvdc</code>, enter the following command:</p>
+					<pre>sudo mkfs -t ext3 /dev/xvdc</pre>
+					<p><strong>Note</strong>: If the Extended File System utilities are not available on your instance, you&rsquo;ll see a message such as the following:</p>
+					<pre>mkfs.ext3: No such file or directory</pre>
+					<p>To install the Extended File System utilities, enter the following command:</p>
+					<pre>sudo yum install e4fsprogs</pre>
+					</li>
+					<li>
+					<p>Create a mount point directory on your instance.</p>
+					<p>For example, to create the mount point&nbsp;<code>/mnt/store</code>, enter the following command:</p>
+					<pre>sudo mkdir /mnt/store</pre>
+					</li>
+					<li>
+					<p>Mount the storage volume on the mount point that you just created.</p>
+					<p>For example, to mount the device&nbsp;<code>/dev/xvdc</code>&nbsp;at the&nbsp;<code>/mnt/store</code>&nbsp;directory, enter the following command:</p>
+					<pre>sudo mount /dev/xvdc /mnt/store</pre>
+					<p>If you prefer, you can specify the disk UUID instead of the device name in the&nbsp;<code>mount</code>&nbsp;command.</p>
+					<p>To find out the UUID of the disks attached to your instance, use the&nbsp;<code>blkid</code>&nbsp;command.</p>
+					</li>
+					<li>
+					<p>To make the mount persistent across instance restarts, edit the&nbsp;<code>/etc/fstab</code>&nbsp;file and add the mount as an entry in that file, as shown in the following example:</p>
+					<pre>/dev/xvdc               /mnt/store        ext3    defaults        0 0</pre>
+					</li>
+					</ol>
+					<p><strong>Optional (Configuring the insance for HTTP access)</strong></p>
+					<p>Your instance is now configured to allow public access only over SSH.</p>
+					<p>To enable access to the instance over other protocols, such as HTTP or HTTPS, you must open the required ports. In this tutorial, you'll create a security rule to enable HTTP access to your instance over port 80.</p>
+					<section><a id="section7s1"></a>&nbsp;
+					<h3 class="d_arrow">Creating a Security List</h3>
+					<div>
+					<p>A security list is a set of instances that can communicate with each other across all protocols and ports. When you create a security rule, you specify a security list as a destination. This allows traffic from a specified source (such as the public Internet) to access all the instances that are part of the destination security list over a specified protocol and port.</p>
+					<p>To create a security list:</p>
+					<ol>
+					<li>
+					<p>On the Compute Classic web console, click the&nbsp;<strong>Network</strong>&nbsp;tab.</p>
+					</li>
+					<li>Click the&nbsp;<strong>Security Lists</strong>&nbsp;tab in the left pane, and then click&nbsp;<strong>Create Security List.</strong></li>
+					<li>
+					<p>In the Create Security List dialog box, select or enter the following information, and then click&nbsp;<strong>Create.</strong></p>
+					<ol type="a">
+					<li>
+					<p><strong>Name</strong>: Enter an appropriate name. For the purpose of this tutorial, enter&nbsp;<strong>For-http-access.</strong></p>
+					</li>
+					<li>
+					<p><strong>Inbound Policy</strong>: Retain the default policy,&nbsp;<strong>Deny (Drop packets, no reply).</strong></p>
+					</li>
+					<li>
+					<p><strong>Outbound Policy</strong>: Retain the default policy,&nbsp;<strong>Permit (Allow packets).</strong></p>
+					</li>
+					<li>
+					<p><strong>Description</strong>: Enter a description.</p>
+					</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create a security list" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-security-list-http.jpg" alt="Create a security list" /></span></p>
+					</li>
+					</ol>
+					</div>
+					</section>
+					<section><a id="section7s2"></a>&nbsp;
+					<h3 class="d_arrow">Adding Your Instance to the Security List</h3>
+					<div>
+					<ol>
+					<li>
+					<p>On the Compute Classic web console, click the&nbsp;<strong>Instances</strong>&nbsp;tab.</p>
+					</li>
+					<li>
+					<p>Go to the instance that you just created, and from the&nbsp;<img title="Menu icon" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/menu_icon.gif" alt="Menu icon" width="14" height="15" />&nbsp;menu, select&nbsp;<strong>View.</strong></p>
+					</li>
+					<li>
+					<p>On the instance details page, click&nbsp;<strong>Add to Security List.</strong>&nbsp;Select the security list that you just created, and then click&nbsp;<strong>Attach.</strong></p>
+					<p>Your instance is added to the&nbsp;<strong>For-http-access</strong>&nbsp;security list.</p>
+					</li>
+					</ol>
+					</div>
+					</section>
+					<section><a id="section7s3"></a>&nbsp;
+					<h3 class="d_arrow">Creating a Security Rule</h3>
+					<div>
+					<p>When you create a security list, the instances in the security list are isolated from hosts outside the security list. You can use security rules to override the default access settings of security lists. Each security rule defines a source, a destination, and a protocol-port combination over which communication is allowed.</p>
+					<p>In this tutorial, you'll set up a security rule to permit HTTP requests from hosts on the public Internet to port 80 of the instances in the&nbsp;<code>For-http-access</code>&nbsp;security list.</p>
+					<p>To create a security rule:</p>
+					<ol>
+					<li>
+					<p>On the Compute Classic web console, click the&nbsp;<strong>Network</strong>&nbsp;tab, and then click the&nbsp;<strong>Security Rules</strong>&nbsp;tab in the left pane.</p>
+					</li>
+					<li>
+					<p>Click&nbsp;<strong>Create Security Rule.</strong></p>
+					</li>
+					<li>
+					<p>In the Create Security Rule dialog box, select or enter the following information, and then click&nbsp;<strong>Create.</strong></p>
+					<ol type="a">
+					<li>
+					<p><strong>Name</strong>: Enter an appropriate name. For the purpose of this tutorial, enter&nbsp;<strong>Allow-http-access.</strong></p>
+					</li>
+					<li>
+					<p><strong>Status</strong>: Retain the default,&nbsp;<strong>Enabled.</strong></p>
+					</li>
+					<li>
+					<p><strong>Security Application</strong>: Select&nbsp;<strong>http.</strong></p>
+					<p><strong>Note:&nbsp;</strong>Many of the commonly-used protocol and port combinations are provided as predefined security applications in Compute Classic. However, if you wish to specify a particular protocol-port mapping that is not predefined, you can create the required security application in the&nbsp;<strong>Security Applications</strong>&nbsp;tab in the left pane.</p>
+					</li>
+					<li>
+					<p><strong>Source</strong>: From the&nbsp;<strong>Security IP Lists</strong>&nbsp;list, select&nbsp;<strong>public-internet.</strong></p>
+					</li>
+					<li>
+					<p><strong>Destination</strong>: From the&nbsp;<strong>Destination</strong>&nbsp;list, select the security list that you created earlier,&nbsp;<strong>For-http-access.</strong></p>
+					</li>
+					<li>
+					<p><strong>Description</strong>: Enter a description.</p>
+					</li>
+					</ol>
+					<p><span class="collapsible-wrapper"><img class="ScreenShot collapsible-outline" title="Create a security rule" src="http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/compute-iaas/creating_an_instance_using_the_web_console/images/create-security-rule-http.jpg" alt="Create a security rule" /></span></p>
+					</li>
+					</ol>
+					<p>Repeat these steps if you want to create security rules to enable access to instances using other protocols and ports, or if you want to specify a different source or destination.</p>
+					</div>
+					</section>
+
+					
+					
+					
+					
+				<!-- Footer -->
+					<!--<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="field half first">
+										<input type="text" name="name" id="name" placeholder="Name" />
+									</div>
+									<div class="field half">
+										<input type="email" name="email" id="email" placeholder="Email" />
+									</div>
+									<div class="field">
+										<textarea name="message" id="message" placeholder="Message"></textarea>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="special" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; All rights reserved</li><li>Design: <a href=""></a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
