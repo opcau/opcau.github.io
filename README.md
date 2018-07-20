@@ -31,8 +31,7 @@ ftp://ftp.opcau.com/anki/v6
 
 For Raspberry Pi image, please download OracleAnkiPi6.1.4.img
 For Virtualbox .ova image, please download OracleAnkiVM6.1.5.ova
-* Pi – Burn Image to SD Card
-  A good tool to use for burning the image is etcher. https://etcher.io/
+* Pi – Burn Image to SD Card. (A good tool to use for burning the image is etcher. https://etcher.io/)
 * VM – Import Image to VirtualBox (only needed if you are not using the Pi.)
 * Configure Wifi Pi
 * Configure Wifi VM (only needed if you are not using the Pi.)
