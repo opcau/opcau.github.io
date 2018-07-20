@@ -32,12 +32,19 @@ ftp://ftp.opcau.com/anki/v6
 For Raspberry Pi image, please download OracleAnkiPi6.1.4.img
 For Virtualbox .ova image, please download OracleAnkiVM6.1.5.ova
 * Pi – Burn Image to SD Card
-* VM – Import Image to VirtualBox
+  A good tool to use for burning the image is etcher. https://etcher.io/
+* VM – Import Image to VirtualBox (only needed if you are not using the Pi.)
 * Configure Wifi Pi
-* Configure Wifi VM
+* Configure Wifi VM (only needed if you are not using the Pi.)
 * Edit RegInfo.txt (reboot)
 * Access the hosted Anki Node Drive Webpage
 * Enjoy!
+
+## Pi or VM?
+A common question asked is, "Should I use a Raspberry Pi or the Virtual Box image?"
+For most cases, the Raspberry Pi will be the best option.  The new 3B+ model has a very good on-board BTLE device; which we've found to be more reliable than most BTLE USB dongles.  It also demos much better because it shows how little compute is needed to capture the data and get it into the Oracle Cloud environment.  When using a laptop, people assume more is being done on the local computer.
+
+If you just don't want to use a Pi, then the VM is another option, but you will need to manage the BTLE setup.
 
 ## Architecture
 BTLE Car > Pi3B+ BTLE > Event Hub (Kafka) > OSA (Spark) > Database > Autonomous Data Warehouse > Analytics
