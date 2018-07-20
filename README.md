@@ -60,7 +60,7 @@ From completely beginner exercises, turning lights on and off, to complex traffi
 
 ## Links
 * The video [https://www.youtube.com/watch?v=QD5v7Fgh3Tk](https://www.youtube.com/watch?v=QD5v7Fgh3Tk)
-* The Software [ftp.opcau.com/anki/v6](ftp://ftp.opcau.com/anki/v6)
+* The Software [ftp://ftp.opcau.com/anki/v6](ftp://ftp.opcau.com/anki/v6)
 * The code (you do not need this) [https://github.com/opcau/anki](https://github.com/opcau/anki)
 * The instructions [https://opcau.github.io/anki/oracle-demo](https://opcau.github.io/anki/oracle-demo)
 * The Dashboards [http://anki.opcau.com/apex/pdb1/f?p=22790:28](http://anki.opcau.com/apex/pdb1/f?p=22790:28)
