@@ -69,67 +69,67 @@
 							<p><strong>Process:</strong></p>
 							<ol>
 							<li>SSH to your compute instance and login as user &ldquo;opc&rdquo;</li>
-							<li>Edit the yum repo file and allow the addon repo to provide an index of available packages by typing &ldquo;sudo vi /etc/yum.repos.d/public-yum-ol7.repo&rdquo; and setting &ldquo;enabled=1&rdquo; under [ol7_addons]<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/1.PNG" alt="blockchain screen shot 1" width="846" height="218" /></li>
-							<li>Install docker by typing &ldquo;sudo yum install docker-engine&rdquo;<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blockchain%202.PNG" alt="Blockchain 2" width="581" height="56" /></li>
+							<li>Edit the yum repo file and allow the addon repo to provide an index of available packages by typing &ldquo;sudo vi /etc/yum.repos.d/public-yum-ol7.repo&rdquo; and setting &ldquo;enabled=1&rdquo; under [ol7_addons]<img src="images/1.PNG" alt="blockchain screen shot 1" width="846" height="218" /></li>
+							<li>Install docker by typing &ldquo;sudo yum install docker-engine&rdquo;<img src="images/blockchain_2.PNG" alt="Blockchain 2" width="581" height="56" /></li>
 							<li>Type &ldquo;y&rdquo; to install the update package</li>
 							</ol>
-							<p style="padding-left: 60px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blockchain%203.PNG" alt="blockchain 3" width="348" height="149" /></p>
-							<p style="padding-left: 30px;">5.&nbsp; Start the docker engine by running &ldquo;sudo systemctl start docker&rdquo;<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blockchain%205.PNG" alt="blockchain 5" width="542" height="51" /></p>
-							<p style="padding-left: 30px;">6.&nbsp; Start the HyperLedger Composer Playground docker container by running &ldquo;sudo docker run --name composer-playground --publish 8080:8080 hyperledger/composer-playground&rdquo;:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blockchain%207.PNG" alt="blockchain 7" width="846" height="72" /></p>
-							<p style="padding-left: 30px;">This will pull the package down from the default docker repository and start it on port 8080.<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blockchain%208.PNG" alt="block 8" width="480" height="73" /></p>
+							<p style="padding-left: 60px;"><img src="images/blockchain_3.PNG" alt="blockchain 3" width="348" height="149" /></p>
+							<p style="padding-left: 30px;">5.&nbsp; Start the docker engine by running &ldquo;sudo systemctl start docker&rdquo;<img src="images/blockchain_5.PNG" alt="blockchain 5" width="542" height="51" /></p>
+							<p style="padding-left: 30px;">6.&nbsp; Start the HyperLedger Composer Playground docker container by running &ldquo;sudo docker run --name composer-playground --publish 8080:8080 hyperledger/composer-playground&rdquo;:<img src="/images/blockchain_7.PNG" alt="blockchain 7" width="846" height="72" /></p>
+							<p style="padding-left: 30px;">This will pull the package down from the default docker repository and start it on port 8080.<img src="images/blockchain_8.PNG" alt="block 8" width="480" height="73" /></p>
 							<ol start="7">
-							<li>Now open a web browser and navigate to the public IP address of your compute instance on port 8080:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/block%209.PNG" alt="block 9" width="366" height="61" /></li>
+							<li>Now open a web browser and navigate to the public IP address of your compute instance on port 8080:<img src="images/block_9.PNG" alt="block 9" width="366" height="61" /></li>
 							</ol>
 							<p>If the page doesn&rsquo;t come up, check the security settings on your compute instance and ensure port 8080 is open.</p>
 							<ol start="8">
-							<li>Click &ldquo;Let&rsquo;s Blockchain&rdquo;<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/lets%20blockchain.PNG" alt="Lets Blockchain" width="689" height="460" /></li>
+							<li>Click &ldquo;Let&rsquo;s Blockchain&rdquo;<img src="images/lets_blockchain.PNG" alt="Lets Blockchain" width="689" height="460" /></li>
 							<li>Click &ldquo;Deploy a new business network&rdquo;</li>
-							<p style="padding-left: 60px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/deploy%20block.PNG" alt="deploy block" width="294" height="340" />&nbsp;</p>
-							<p style="padding-left: 30px;">10.  Enter the following basic information:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/give%20your.PNG" alt="give your" width="825" height="282" />
+							<p style="padding-left: 60px;"><img src="images/deploy_block.PNG" alt="deploy block" width="294" height="340" />&nbsp;</p>
+							<p style="padding-left: 30px;">10.  Enter the following basic information:<img src="images/give_your.PNG" alt="give your" width="825" height="282" />
 							<p style="padding-left: 30px;">11.&nbsp;&nbsp;Select &ldquo;marbles-network&rdquo; as the model network starter template:</p>
-							<p style="padding-left: 60px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/Marbles%20Network.PNG" alt="Marbles Network" width="273" height="304" /></p>
+							<p style="padding-left: 60px;"><img src="images/Marbles_Network.PNG" alt="Marbles Network" width="273" height="304" /></p>
 							<p style="padding-left: 30px;">12.&nbsp; Click &ldquo;Deploy&rdquo;</p>
-							<p style="padding-left: 90px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/deply%20blockchain%20button.PNG" alt="deploy blockchain button" width="205" height="85" /></p>
+							<p style="padding-left: 90px;"><img src="images/deply_blockchain_button.PNG" alt="deploy blockchain button" width="205" height="85" /></p>
 							<p style="padding-left: 60px;">&nbsp;</p>
 							<p style="padding-left: 90px;">&nbsp;</p>
 							<p style="padding-left: 30px;">13. Click on &ldquo;Connect now&rdquo; under the newly created marble-trading network card:</p>
-							<p style="padding-left: 90px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/admin%20block.PNG" alt="admin block" width="344" height="466" /></p>
+							<p style="padding-left: 90px;"><img src="images/admin_block.PNG" alt="admin block" width="344" height="466" /></p>
 							<p style="padding-left: 30px;">14.&nbsp; Click on &ldquo;Test&rdquo; in the menu bar up the top</p>
-							<p style="padding-left: 60px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/test%20block.PNG" alt="test block" width="90" height="77" /></p>
+							<p style="padding-left: 60px;"><img src="images/test_block.PNG" alt="test block" width="90" height="77" /></p>
 							<p style="padding-left: 30px;">15.&nbsp; Click on &ldquo;+ Create New Participant&rdquo; on the &ldquo;Player&rdquo; page.</p>
-							<p style="padding-left: 60px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/create%20new%20part%20block.PNG" alt="Create new block" width="240" height="69" /></p>
+							<p style="padding-left: 60px;"><img src="images/create_new_part_block.PNG" alt="Create new block" width="240" height="69" /></p>
 							<p style="padding-left: 30px;">16.&nbsp; Enter the following JSON code in the popup window. Note: This would be the JSON you would POST to the RESTful API of a live HyperLedger fabric:</p>
-							<p style="padding-left: 30px;">&nbsp;<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/sclass%20%20org%20hyper%20block.PNG" alt="sclass org block" width="685" height="185" /></p>
-							<p style="padding-left: 30px;">&nbsp; 18.&nbsp; Repeat steps 15-17 with the following JSON data to create a second party:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/sclass%20org%20hyperledge%20composer.PNG" alt="sclass org hyperledger composer" width="677" height="186" /></p>
+							<p style="padding-left: 30px;">&nbsp;<img src="images/sclass_org_hyper_block.PNG" alt="sclass org block" width="685" height="185" /></p>
+							<p style="padding-left: 30px;">&nbsp; 18.&nbsp; Repeat steps 15-17 with the following JSON data to create a second party:<img src="images/sclass_org_hyperledge_composer.PNG" alt="sclass org hyperledger composer" width="677" height="186" /></p>
 							<p style="padding-left: 30px;">We&rsquo;ve now created 2 Marble Players who can own marbles.</p>
 							<p style="padding-left: 30px;">19.&nbsp; Click on &ldquo;Marble&rdquo; under &ldquo;Assets&rdquo; in the left hand menu.</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/marble%20block.PNG" alt="marble block" width="379" height="65" /></p>
+							<p style="padding-left: 30px;"><img src="images/marble%20block.PNG" alt="marble block" width="379" height="65" /></p>
 							<p style="padding-left: 30px;">&nbsp; 20.&nbsp; Click &ldquo;+ Create New Asset&rdquo;</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/create%20new%20assett.PNG" alt="Create new assett" width="259" height="80" /></p>
-							<p style="padding-left: 30px;">&nbsp; 21.&nbsp; Enter the following JSON, paying attention to the marbleId value:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/block%20-%20screeen%20shot%2021.PNG" alt="block image 21" width="776" height="230" /></p>
+							<p style="padding-left: 30px;"><img src="images/create_new_asset.PNG" alt="Create new assett" width="259" height="80" /></p>
+							<p style="padding-left: 30px;">&nbsp; 21.&nbsp; Enter the following JSON, paying attention to the marbleId value:<img src="images/block_screeen_shot_21.PNG" alt="block image 21" width="776" height="230" /></p>
 							<p style="padding-left: 30px;">&nbsp; 22.&nbsp; Click &ldquo;Create New"</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/create%20new%20button.PNG" alt="create new button" width="187" height="67" /></p>
-							<p style="padding-left: 30px;">&nbsp; 23.&nbsp; Repeat steps 20-22 with the following JSON:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/block%20green%20script.PNG" alt="green block" width="759" height="236" />24.&nbsp; Repeat steps 20-22 with the following JSON:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/blue%20block%20script.PNG" alt="blue block" width="756" height="237" /></p>
+							<p style="padding-left: 30px;"><img src="images/create_new_button.PNG" alt="create new button" width="187" height="67" /></p>
+							<p style="padding-left: 30px;">&nbsp; 23.&nbsp; Repeat steps 20-22 with the following JSON:<img src="images/block_green_script.PNG" alt="green block" width="759" height="236" />24.&nbsp; Repeat steps 20-22 with the following JSON:<img src="images/blue_block_script.PNG" alt="blue block" width="756" height="237" /></p>
 							<p style="padding-left: 30px;">We&rsquo;ve now created 3 marble assets with different attributes, 2 owned by Tom Walker, 1 owned by Sam Treacy. 25.&nbsp; Click on &ldquo;All Transactions&rdquo; in the left hand pane</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/all%20transactions.PNG" alt="all transactions" width="385" height="62" /></p>
+							<p style="padding-left: 30px;"><img src="images/all_transactions.PNG" alt="all transactions" width="385" height="62" /></p>
 							<p style="padding-left: 30px;">You&rsquo;ll see there are already a number of transactions listed &ndash; these represent the creation of our Players and Marble Assets. You can see the details by clicking on &ldquo;view record&rdquo;</p>
 							<p style="padding-left: 30px;">26.&nbsp; We will now generate a smart contracting, transitioning ownership of a marble from Tom Walker to Sam Treacy. To do this, click on &ldquo;Submit Transaction&rdquo; in the left hand pane:</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/submit%20transaction.PNG" alt="submit transaction button" width="261" height="71" /></p>
-							<p style="padding-left: 30px;">&nbsp;27.&nbsp; Enter the following JSON, noting that this will trade marble ID 0050 (currently owned by Tom Walker) to Sam Treacy:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/block%2027%20screen%20shot.PNG" alt="block 27" width="755" height="227" /></p>
+							<p style="padding-left: 30px;"><img src="images/submit_transaction.PNG" alt="submit transaction button" width="261" height="71" /></p>
+							<p style="padding-left: 30px;">&nbsp;27.&nbsp; Enter the following JSON, noting that this will trade marble ID 0050 (currently owned by Tom Walker) to Sam Treacy:<img src="images/block_27_screen_shot.PNG" alt="block 27" width="755" height="227" /></p>
 							<p style="padding-left: 30px;">28.&nbsp; Click &ldquo;Submit&rdquo;</p>
 							<p>&nbsp; &nbsp; &nbsp; 29.&nbsp; Now click on &ldquo;Marble&rdquo; in the left hand pane:</p>
-							<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/marble%20block.PNG" alt="marble" width="379" height="65" /></p>
+							<p style="padding-left: 30px;"><img src="images/marble_block.PNG" alt="marble" width="379" height="65" /></p>
 							<p>And you should see that marble 0050 (the SMALL GREEN one) is now owned by Sam Treacy:</p>
 							<p>&nbsp;</p>
 							<p>Congratulations, you&rsquo;ve just set up a Business Blockchain, populated it with participants and assets, and committed an immutable transaction between two participants to the ledger!</p>
 														<ol start="17">
 <li>Click &ldquo;Create New&rdquo;</li>
 </ol>
-<p style="padding-left: 30px;"><img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/create%20new%20button.PNG" alt="Create new button" width="187" height="67" /></p>
-<p>&nbsp; 18.&nbsp; Repeat steps 15-17 with the following JSON data to create a second party:<img src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/sclass%20org%20hyperledge%20composer.PNG" alt="sclass org hyperledger composer" width="677" height="186" /></p
+<p style="padding-left: 30px;"><img src=images/create_new_button.PNG" alt="Create new button" width="187" height="67" /></p>
+<p>&nbsp; 18.&nbsp; Repeat steps 15-17 with the following JSON data to create a second party:<img src="images/sclass_org_hyperledge_composer.PNG" alt="sclass org hyperledger composer" width="677" height="186" /></p
 						</div>
 						<p>
-	<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://stbeehive.oracle.com/content/dav/st/Build%20Your%20Own/Public%20Documents/images/$300%20Trial%20QR%20CODE.png" alt="QR Code $300" width="300" height="300" /></p>
+	<p><img style="display: block; margin-left: auto; margin-right: auto;" src="images/$300_Trial_QR_CODE.png" alt="QR Code $300" width="300" height="300" /></p>
 <p style="text-align: center;"><a title="TRY IT TODAY!" href="https://cloud.oracle.com/tryit">https://cloud.oracle.com/tryit</a></p>
 
 				<!-- Footer -->
