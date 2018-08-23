@@ -100,14 +100,42 @@
 							<p>12.&nbsp; Take note of the location of your wallet file for later use.</p>
 							<p>13.&nbsp; Launch SQL Developer.</p>
 							<p>14.&nbsp; Click the &ldquo;+&rdquo;</p>
-							<img src="images/auto5.png"
+							<img src="images/auto5.png"</p>
 							<p>15.&nbsp; Enter the following information in the dialog box:</p>
 							<p><strong>Connection Name:</strong> admin_high<br /> <strong>Username:</strong> admin<br /> <strong>Password:</strong> As provided in step 4<br /> <strong>Save Password:</strong> Selected<br /> <strong>Connection Type:</strong> Cloud PDB<br /> <strong>Role:</strong> Default<br /> <strong>Configuration File:</strong> Browse and select the wallet file you saved earlier.<br /> <strong>Keystore Password:</strong> As provided in step 11<br /> <strong>Service:</strong> adwtest_high</p>
+							<img src="images/auto15.png"</p>
+							<p>16. Click &ldquo;Save&rdquo; and then click &ldquo;Connect&rdquo;</p>
+							<p>17. In the worksheet pane, enter the following (long running) SQL query:</p>
 						</div>
 						
 						<p>
 						<p><img style="display: block; margin-left: auto; margin-right: auto;" src="images/$300_Trial_QR_CODE.png" alt="QR Code $300" width="300" height="300" /></p>
 						<p style="text-align: center;"><a title="TRY IT TODAY!" href="https://cloud.oracle.com/tryit">https://cloud.oracle.com/tryit</a></p>
+						<p>
+						<p><strong>select sum(lo_extendedprice*lo_discount) as revenue</strong></p>
+						<p><strong>from ssb.lineorder, ssb.dwdate</strong></p>
+						<p><strong>where lo_orderdate = d_datekey</strong></p>
+						<p><strong>and d_yearmonthnum = 199401</strong></p>
+						<p><strong>and lo_discount between 4 and 6</strong></p>
+						<p><strong>and lo_quantity between 26 and 35;</strong></p>
+						<p>
+						<p>18. Click the run query button in the top pane:</p>
+						<img src="images/auto18.png"</p>
+						<p>19. While this query is running return to the ADW service console website and click on &ldquo;Scale Up/Down&rdquo; in the top menu:</p>
+						<img src="images/auto19.png"</p>
+						<p>20. Enter a CPU count of 4 and click &ldquo;Update&rdquo;</p>
+						<img src="images/auto20.png"</p>
+						<p>21. Notice that as the state transitions from &ldquo;Scaling In Progress&hellip;&rdquo; to &ldquo;Available&rdquo; your query continues to run &ndash; all scaling activities are completed with the database online and fully functioning.</p>
+						<img src="images/auto21a.png"</p>
+						<img src="images/auto21b.png"</p>
+						<p>22. Once again, click on &ldquo;Scale Up/Down&rdquo;</p>
+						<img src="images/auto22.png"</p>
+						<p>23. Enter a CPU Core Count of &ldquo;1&rdquo; and click on &ldquo;Update&rdquo;</p>
+						<img src="images/auto23.png"</p>
+						<p>24. Once again, your query will continue to run as the database scales itself down dynamically. This is a feature no other cloud based Data Warehouse offers, and it is completed in a matter of seconds with no more than a few clicks!</p>
+						<img src="images/auto24a.png"</p>
+						<img src="images/auto24b.png"</p>
+						<p>If you&rsquo;d like to learn more about the Oracle Autonomous Data Warehouse &ndash; feel free to try a range of additional how-to activities available now on the Oracle GitHub: <a href="https://oracle.github.io/learning-library/workshops/journey4-adwc">https://oracle.github.io/learning-library/workshops/journey4-adwc</a></p>
 
 				<!-- Footer -->
 					<!--<footer id="footer">
